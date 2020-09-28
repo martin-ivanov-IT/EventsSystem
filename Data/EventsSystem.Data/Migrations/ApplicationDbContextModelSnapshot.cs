@@ -184,7 +184,7 @@ namespace EventsSystem.Data.Migrations
 
                     b.HasIndex("PlaceId");
 
-                    b.ToTable("Event");
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.Place", b =>
@@ -219,7 +219,7 @@ namespace EventsSystem.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Place");
+                    b.ToTable("Places");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.Setting", b =>
