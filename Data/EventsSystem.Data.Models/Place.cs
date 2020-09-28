@@ -19,6 +19,5 @@ namespace EventsSystem.Data.Models
         public string Address { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
-
     }
 }

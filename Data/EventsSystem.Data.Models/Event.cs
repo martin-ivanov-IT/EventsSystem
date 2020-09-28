@@ -20,7 +20,5 @@ namespace EventsSystem.Data.Models
         public int CreatorId { get; set; }
 
         public virtual ApplicationUser Creator { get; set; }
-
-
     }
 }
