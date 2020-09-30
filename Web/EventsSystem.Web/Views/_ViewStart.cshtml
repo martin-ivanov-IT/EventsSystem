@@ -1,3 +1,11 @@
 ﻿@{
-    this.Layout = "_Layout";
+
+    if (Context.User.Identity.IsAuthenticated)
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_NotLoggedLayout";
+    }
 }
