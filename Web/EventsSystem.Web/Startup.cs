@@ -105,6 +105,7 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("eventPlace", "/{name}", new {controller = "Places", action ="ByName" });
+                        endpoints.MapControllerRoute("eventForm", "/f/{name}", new {controller = "CreateEvent", action = "FillForm" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

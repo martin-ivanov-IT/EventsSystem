@@ -15,7 +15,6 @@ namespace EventsSystem.Data.Models
         public string Name { get; set; }
 
         public string ImageUrl { get; set; }
-
         public string Address { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
