@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\EventsSystem.Data.Common\EventsSystem.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\EventsSystem.Data.Models\EventsSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\EventsSystem.Web.ViewModels\EventsSystem.Web.ViewModels.csproj" />
     <ProjectReference Include="..\EventsSystem.Services.Mapping\EventsSystem.Services.Mapping.csproj" />
   </ItemGroup>
 

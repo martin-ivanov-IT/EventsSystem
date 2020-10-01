@@ -14,20 +14,20 @@
 
     public class HomeController : BaseController
     {
-        public IPlacesService placesService { get; }
+        public IEventsService EventsService { get; }
 
-        public HomeController(IPlacesService placesService)
+        public HomeController(IEventsService eventsService)
         {
-            this.placesService = placesService;
+            this.EventsService = eventsService;
         }
 
         public IActionResult Index()
         {
 
             var viewModel = new ViewModels.Home.IndexViewModel();
-            var places = this.placesService.GetAll<IndexPlaceViewModel>();
+            var events = this.EventsService.GetAll<IndexEventViewModel>();
 
-            viewModel.Places = places;
+            viewModel.Events = events;
 
             return this.View(viewModel);
         }

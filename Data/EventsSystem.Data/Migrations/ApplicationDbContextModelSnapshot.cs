@@ -146,20 +146,20 @@ namespace EventsSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CreatorId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("EntranceFee")
-                        .HasColumnType("float");
+                    b.Property<int>("EntranceFee")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EntranceType")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -167,7 +167,10 @@ namespace EventsSystem.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PlaceId")
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PlaceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Time")
@@ -178,7 +181,7 @@ namespace EventsSystem.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId1");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("IsDeleted");
 
@@ -360,15 +363,13 @@ namespace EventsSystem.Data.Migrations
 
             modelBuilder.Entity("EventsSystem.Data.Models.Event", b =>
                 {
-                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "Creator")
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", null)
                         .WithMany("Events")
-                        .HasForeignKey("CreatorId1");
+                        .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("EventsSystem.Data.Models.Place", "Place")
+                    b.HasOne("EventsSystem.Data.Models.Place", null)
                         .WithMany("Events")
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("PlaceId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
