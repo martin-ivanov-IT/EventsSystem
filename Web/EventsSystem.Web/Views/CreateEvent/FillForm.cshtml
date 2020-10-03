@@ -1,0 +1,80 @@
+﻿@model EventsSystem.Web.ViewModels.CreateEvent.CreateEventInputModel
+@using EventsSystem.Web.ViewModels.CreateEvent
+<link href="~/css/FillForm.css" rel="stylesheet" type="text/css" />
+
+
+
+<h1> Create Event</h1>
+<div class="col-md-4">
+    <form asp-controller="CreateEvent" asp-action="FillForm" method="post" class="form">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Time"></label>
+            <input asp-for="Time" class="form-control" />
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="VisitorsCount"></label>
+            <input asp-for="VisitorsCount" class="form-control" />
+            <span asp-validation-for="VisitorsCount" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Place.Address"></label>
+            <input asp-for="Place.Address" class="form-control" />
+            <span asp-validation-for="Place.Address" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EntranceType"></label>
+            <select asp-for="EntranceType" id="type"
+                    asp-items="@Html.GetEnumSelectList<EntranceType>()"
+                    class="form-control">
+                <option disabled selected>--- SELECT ---</option>
+            </select>
+            <span asp-validation-for="EntranceType" class="text-danger"></span>
+        </div>
+
+        <div class="form-group" id="entranceFee">
+            <label asp-for="EntranceFee"></label>
+            <input asp-for="EntranceFee" class="form-control" />
+            <span asp-validation-for="EntranceFee" class="text-danger"></span>
+        </div>
+
+        <hr />
+
+        <input type="submit" name="name" value="Create Event" class="btn btn-primary" />
+    </form>
+</div>
+
+<script type="text/javascript">
+    (function () {
+
+        let entranceType = document.getElementById("type");
+        let entranceFee = document.getElementById("entranceFee");
+
+        entranceType.addEventListener("change", function () {
+
+            if (entranceType.value === "1") {
+                entranceFee.style.visibility = "hidden"
+            }
+
+            if (entranceType.value === "2") {
+                entranceFee.style.visibility = "visible"
+            }
+        });
+
+    })();
+</script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
