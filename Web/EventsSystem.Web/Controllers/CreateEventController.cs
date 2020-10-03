@@ -47,7 +47,7 @@ namespace EventsSystem.Web.Controllers
                 Description = input.Description,
                 Place = new Place
                 {
-                    Address = input.City,
+                    Address = input.PlaceCity,
                 },
 
                 Initiator = user,

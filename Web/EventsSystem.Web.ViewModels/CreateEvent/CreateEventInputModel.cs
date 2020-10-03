@@ -1,5 +1,7 @@
-﻿using EventsSystem.Data.Models;
+﻿using AutoMapper;
+using EventsSystem.Data.Models;
 using EventsSystem.Services.Mapping;
+using EventsSystem.Web.ViewModels.Home;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,8 +29,15 @@ namespace EventsSystem.Web.ViewModels.CreateEvent
         public EntranceType EntranceType { get; set; }
 
         [Required]
-        public string City { get; set; }
+        public string PlaceCity { get; set; }
 
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Event, CreateEventInputModel>()
+                         .ForMember(
+                             x => x.PlaceCity,
+                             c => c.MapFrom(e => e.Place.Address));
+        }
 
     }
 }

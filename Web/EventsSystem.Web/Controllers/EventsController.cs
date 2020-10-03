@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EventsSystem.Services.Data;
+using EventsSystem.Web.ViewModels.Events;
+using EventsSystem.Web.ViewModels.Home;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +11,17 @@ namespace EventsSystem.Web.Controllers
 {
     public class EventsController : BaseController
     {
-        public IActionResult EventsByName()
+        private readonly IEventsService eventsService;
+
+        public EventsController(IEventsService eventsService)
         {
-            return this.View();
+            this.eventsService = eventsService;
+        }
+
+        public IActionResult EventsByName(string name)
+        {
+            var viewModel = this.eventsService.GetByName<IndexEventViewModel>(name);
+            return this.View(viewModel);
         }
 
     }

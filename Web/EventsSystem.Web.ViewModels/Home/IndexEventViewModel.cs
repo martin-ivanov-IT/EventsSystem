@@ -9,6 +9,8 @@ namespace EventsSystem.Web.ViewModels.Home
 {
    public class IndexEventViewModel : IMapFrom<Event>, IHaveCustomMappings
     {
+        public string Description { get; set; }
+
         public string Name { get; set; }
 
         public DateTime Time { get; set; }
@@ -27,6 +29,7 @@ namespace EventsSystem.Web.ViewModels.Home
                          .ForMember(
                              x => x.Url,
                              c => c.MapFrom(e => "/" + e.Name.Replace(' ', '-')));
+
         }
     }
 }
