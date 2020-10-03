@@ -16,21 +16,22 @@
         </div>
 
         <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
             <label asp-for="Time"></label>
             <input asp-for="Time" class="form-control" />
             <span asp-validation-for="Time" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="VisitorsCount"></label>
-            <input asp-for="VisitorsCount" class="form-control" />
-            <span asp-validation-for="VisitorsCount" class="text-danger"></span>
-        </div>
 
         <div class="form-group">
-            <label asp-for="Place.Address"></label>
-            <input asp-for="Place.Address" class="form-control" />
-            <span asp-validation-for="Place.Address" class="text-danger"></span>
+            <label asp-for="City"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
         </div>
 
         <div class="form-group">

@@ -20,8 +20,6 @@ namespace EventsSystem.Data.Models
 
         public DateTime Time { get; set; }
 
-        public int? VisitorsCount { get; set; }
-
         public int? EntranceFee { get; set; }
 
         public EntranceType EntranceType { get; set; }

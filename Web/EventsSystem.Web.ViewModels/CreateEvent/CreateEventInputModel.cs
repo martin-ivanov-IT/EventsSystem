@@ -13,22 +13,22 @@ namespace EventsSystem.Web.ViewModels.CreateEvent
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Date and time of the event")]
-        public DateTime Time { get; set; }
-
-        // only adress should be given and after that new place with the given
-        // adress should be generated in service
-        public virtual Place Place { get; set; }
-
-        [Display(Name = "Max Visitors count (not required)")]
-        [Range(1, int.MaxValue)]
-        public int? VisitorsCount { get; set; }
+        public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Date and time of the event")]
+
+        public DateTime Time { get; set; }
+
         [Display(Name = "Entrance fee in Lv")]
         [Range (1, int.MaxValue)]
-        public int EntranceFee { get; set; }
+        public int? EntranceFee { get; set; }
 
         public EntranceType EntranceType { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+
     }
 }
