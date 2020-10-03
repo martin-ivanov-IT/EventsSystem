@@ -29,6 +29,8 @@ namespace EventsSystem.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        public string City { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
@@ -36,5 +38,9 @@ namespace EventsSystem.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
+
+        public virtual ICollection<PlaceReview> PlaceReviews { get; set; }
+
+        public virtual ICollection<EventReview> EventReviews { get; set; }
     }
 }

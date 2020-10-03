@@ -68,6 +68,9 @@ namespace EventsSystem.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -146,20 +149,26 @@ namespace EventsSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EntranceFee")
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EntranceFee")
                         .HasColumnType("int");
 
                     b.Property<int>("EntranceType")
                         .HasColumnType("int");
+
+                    b.Property<int>("InitiatorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InitiatorId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -170,24 +179,72 @@ namespace EventsSystem.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlaceId")
+                    b.Property<int>("PlaceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VisitorsCount")
+                    b.Property<int?>("VisitorsCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("InitiatorId1");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("PlaceId");
 
                     b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.EventReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Dislikes")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("PlaceId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("EventReviews");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.Place", b =>
@@ -200,13 +257,16 @@ namespace EventsSystem.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -223,6 +283,49 @@ namespace EventsSystem.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Places");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.PlaceReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Dislikes")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("PlaceReviews");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.Setting", b =>
@@ -363,13 +466,45 @@ namespace EventsSystem.Data.Migrations
 
             modelBuilder.Entity("EventsSystem.Data.Models.Event", b =>
                 {
-                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", null)
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "Initiator")
                         .WithMany("Events")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("InitiatorId1");
 
-                    b.HasOne("EventsSystem.Data.Models.Place", null)
+                    b.HasOne("EventsSystem.Data.Models.Place", "Place")
                         .WithMany("Events")
-                        .HasForeignKey("PlaceId");
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.EventReview", b =>
+                {
+                    b.HasOne("EventsSystem.Data.Models.Event", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("EventId");
+
+                    b.HasOne("EventsSystem.Data.Models.Place", "Place")
+                        .WithMany()
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "User")
+                        .WithMany("EventReviews")
+                        .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.PlaceReview", b =>
+                {
+                    b.HasOne("EventsSystem.Data.Models.Place", "Place")
+                        .WithMany("Reviews")
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "User")
+                        .WithMany("PlaceReviews")
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -30,6 +30,10 @@
 
         public DbSet<Place> Places { get; set; }
 
+        public DbSet<PlaceReview> PlaceReviews { get; set; }
+
+        public DbSet<EventReview> EventReviews { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
