@@ -14,7 +14,7 @@
 <div class="media">
     <div class="media-body">
         <h5 class="mt-0">Description</h5>
-        <p>@Model.Description</p>
+        <p>@Html.Raw(Model.SanitizedDescription)</p>
     </div>
 </div>
 
