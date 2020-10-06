@@ -2,6 +2,7 @@
 using EventsSystem.Data.Models;
 using EventsSystem.Services.Data;
 using EventsSystem.Web.ViewModels.CreateEvent;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,6 +24,7 @@ namespace EventsSystem.Web.Controllers
 
         public ApplicationDbContext Db { get; }
 
+        [Authorize]
         public IActionResult FillForm()
         {
 
@@ -30,6 +32,7 @@ namespace EventsSystem.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> FillForm(CreateEventInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -39,17 +42,19 @@ namespace EventsSystem.Web.Controllers
 
             var user = await this.userManager.GetUserAsync(this.User);
             var ev = new Event
+
             {
                 Name = input.Name,
                 Time = input.Time,
                 EntranceFee = input.EntranceFee,
                 EntranceType = input.EntranceType,
                 Description = input.Description,
-                Place = new Place
-                {
+                Place = new Place {
                     Address = input.PlaceCity,
+                    Name = input.Name,
+                    City = input.PlaceCity,
                 },
-
+                PlaceUrl = "p/" + input.Name.Replace(' ', '-'),
                 Initiator = user,
             };
 

@@ -30,5 +30,14 @@
                 .To<T>().FirstOrDefault();
          return place;
         }
+
+        public Place GetPlaceByName(string name)
+        {
+            IQueryable<Place> places = this.placesRepository.All();
+                //.Where(x => x.Name.Equals(name.Replace("-", " ")));
+                   
+            return places.FirstOrDefault(x => x.Name.Equals(name.Replace("-", " ")));
+        }
+
     };
 }

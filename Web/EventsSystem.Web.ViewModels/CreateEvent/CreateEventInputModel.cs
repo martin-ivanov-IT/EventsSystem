@@ -31,12 +31,18 @@ namespace EventsSystem.Web.ViewModels.CreateEvent
         [Required]
         public string PlaceCity { get; set; }
 
+        [Required]
+        public string PlaceName { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Event, CreateEventInputModel>()
                          .ForMember(
                              x => x.PlaceCity,
-                             c => c.MapFrom(e => e.Place.Address));
+                             c => c.MapFrom(e => e.Place.Address))
+                         .ForMember(
+                             x => x.PlaceName,
+                             c => c.MapFrom(e => e.Place.Name));
         }
 
     }

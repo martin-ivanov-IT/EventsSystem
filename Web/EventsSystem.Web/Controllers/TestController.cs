@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Server.IIS.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EventsSystem.Web.Controllers
@@ -47,6 +48,10 @@ namespace EventsSystem.Web.Controllers
             });
 
             var user = await this.userManager.GetUserAsync(this.User);
+
+            var claim = await userManager.AddClaimAsync(user, new Claim(ClaimTypes.PostalCode, "1000"));
+
+            var postCode = this.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.PostalCode)?.Value;
 
             await this.userManager.AddToRoleAsync(user, "Admin");
 

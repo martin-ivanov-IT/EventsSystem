@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EventsSystem.Web.Controllers
 {
-    public class EventsController : BaseController
+    public class EventsController : Controller
     {
         private readonly IEventsService eventsService;
 
@@ -20,7 +20,7 @@ namespace EventsSystem.Web.Controllers
 
         public IActionResult EventsByName(string name)
         {
-            var viewModel = this.eventsService.GetByName<IndexEventViewModel>(name);
+            var viewModel = this.eventsService.GetByName<EventViewModel>(name);
             return this.View(viewModel);
         }
 

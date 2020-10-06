@@ -28,6 +28,8 @@ namespace EventsSystem.Data.Models
 
         public Place Place { get; set; }
 
+        public string PlaceUrl { get; set; }
+
         [Required]
         public int InitiatorId { get; set; }
 

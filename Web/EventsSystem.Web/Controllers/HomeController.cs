@@ -12,7 +12,7 @@
     using EventsSystem.Services.Mapping;
     using EventsSystem.Services.Data;
 
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         public IEventsService EventsService { get; }
 

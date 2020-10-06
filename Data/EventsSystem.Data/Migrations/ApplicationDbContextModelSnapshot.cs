@@ -182,6 +182,9 @@ namespace EventsSystem.Data.Migrations
                     b.Property<int>("PlaceId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PlaceUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 

@@ -13,5 +13,7 @@ namespace EventsSystem.Web.ViewModels.Places
 
         public string Address { get; set; }
 
+        public ICollection<PlaceReview> Reviews { get; set; }
+
     }
 }
