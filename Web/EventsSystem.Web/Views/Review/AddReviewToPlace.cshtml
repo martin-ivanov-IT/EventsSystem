@@ -1,0 +1,27 @@
+﻿@model EventsSystem.Web.ViewModels.Review.AddReviewToPlaceModel
+@using EventsSystem.Web.ViewModels.Review
+
+<h1> Create Review</h1>
+<div class="col-md-4">
+    <form asp-controller="Review" asp-action="AddReviewToPlace" method="post" class="form">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" value = "@this.ViewContext.RouteData.Values["name"].ToString().Replace("-"," ")"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        @this.ViewContext.RouteData.Values["name"]
+
+        <hr />
+
+        <input type="submit" name="name" value="Create Review" class="btn btn-primary" />
+    </form>
+</div>

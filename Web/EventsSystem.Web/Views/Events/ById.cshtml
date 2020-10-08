@@ -1,0 +1,61 @@
+﻿@using EventsSystem.Common
+@model EventsSystem.Web.ViewModels.Events.EventViewModel
+
+<div class="media">
+    <div class="media-body">
+        <h1 class="text-center mt-0 mb-1 text-justify">
+            @Model.Name
+            <small class="text-muted">@Model.Place.Address</small>
+        </h1>
+    </div>
+
+</div>
+
+<div class="media">
+    <div class="media-body">
+        <h5 class="mt-0">Description</h5>
+        <p>@Html.Raw(Model.SanitizedDescription)</p>
+    </div>
+</div>
+
+<div class="media">
+    <div class="media-body">
+        <h5 class="mt-0">Time of The Event</h5>
+        <p>@Model.Time</p>
+    </div>
+</div>
+
+<div class="media">
+    <div class="media-body">
+        <h5 class="mt-0">Place of event</h5>
+        <p>@Model.Place.Address</p>
+    </div>
+
+    <div class="media-body">
+        <h4 class="media-heading">
+            <a asp-controller="Places" asp-action="ById" asp-route-id="@Model.PlaceId">@Model.Place.Name</a>
+        </h4>
+
+    </div>
+</div>
+
+@if (Model.EntranceFee != 0)
+{
+    <div class="media">
+        <div class="media-body">
+            <h5 class="mt-0">Entrance</h5>
+            <p>@Model.EntranceFee lv</p>
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="media">
+        <div class="media-body">
+            <h5 class="mt-0">Entrance</h5>
+            <p>Free</p>
+        </div>
+    </div>
+
+}
