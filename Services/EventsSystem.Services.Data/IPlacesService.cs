@@ -12,5 +12,6 @@ namespace EventsSystem.Services.Data
 
         Place GetPlaceByName(string name);
 
+        T GetById<T>(int id);
     }
 }

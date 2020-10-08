@@ -19,24 +19,30 @@
 
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
-           IQueryable<Place> query = this.placesRepository.All().OrderBy(x => x.Name);
+            IQueryable<Place> query = this.placesRepository.All().OrderBy(x => x.Name);
 
-           return query.To<T>().ToList();
+            return query.To<T>().ToList();
         }
 
         public T GetByName<T>(string name)
         {
-         var place = this.placesRepository.All().Where(x => x.Name == name.Replace("-", " "))
-                .To<T>().FirstOrDefault();
-         return place;
+            var place = this.placesRepository.All().Where(x => x.Name == name.Replace("-", " "))
+                   .To<T>().FirstOrDefault();
+            return place;
         }
 
         public Place GetPlaceByName(string name)
         {
             IQueryable<Place> places = this.placesRepository.All();
-                //.Where(x => x.Name.Equals(name.Replace("-", " ")));
-                   
+
             return places.FirstOrDefault(x => x.Name.Equals(name.Replace("-", " ")));
+        }
+
+        public T GetById<T>(int id)
+        {
+            var place = this.placesRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return place;
         }
 
     };

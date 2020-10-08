@@ -9,5 +9,7 @@ namespace EventsSystem.Services.Data
         IEnumerable<T> GetAll<T>(int? count = null);
 
         T GetByName<T>(string name);
+
+        T GetById<T>(int id);
     }
 }

@@ -12,7 +12,6 @@
     using EventsSystem.Services.Mapping;
     using EventsSystem.Services.Messaging;
     using EventsSystem.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -50,8 +49,14 @@
             services.AddControllersWithViews(
                 options =>
                     {
-                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                       // options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
+
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
+
             services.AddRazorPages();
 
             services.AddSingleton(this.configuration);
@@ -66,6 +71,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPlacesService, PlacesService>();
             services.AddTransient<IEventsService, EventsService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,7 +112,9 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("eventRoute", "/{name}", new {controller = "Events", action ="EventsByName" });
+                        endpoints.MapControllerRoute("eventRouteId", "event/{id}", new {controller = "Events", action = "ById" });
                         endpoints.MapControllerRoute("placeRoute", "p/{name}", new {controller = "Places", action = "ByName" });
+                        endpoints.MapControllerRoute("placeRouteId", "place/{id}", new {controller = "Places", action = "ById" });
                         endpoints.MapControllerRoute("eventForm", "/f/{name}", new {controller = "CreateEvent", action = "FillForm" });
                         endpoints.MapControllerRoute("eventForm", "r/{name}", new {controller = "Review", action = "AddReviewToPlace" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");

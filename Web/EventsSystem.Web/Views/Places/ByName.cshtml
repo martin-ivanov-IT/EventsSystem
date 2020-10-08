@@ -12,9 +12,27 @@
     <h3>Reviews</h3>
     @foreach (var rev in Model.Reviews)
     {
+        <hr />
         <div>@rev.Description</div>
+
+
+        @Model.Name
+        <div>
+
+            <i class="fa fa-thumbs-up"></i>
+
+        </div>
+
+        <div>
+
+            <i class="fa fa-thumbs-down"></i>
+
+        </div>
+        <hr />
     }
 }
+
+
 
 
 

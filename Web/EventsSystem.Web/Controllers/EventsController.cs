@@ -24,5 +24,15 @@ namespace EventsSystem.Web.Controllers
             return this.View(viewModel);
         }
 
+        public IActionResult ById(int id)
+        {
+            var postViewModel = this.eventsService.GetById<EventViewModel>(id);
+            if (postViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(postViewModel);
+        }
     }
 }

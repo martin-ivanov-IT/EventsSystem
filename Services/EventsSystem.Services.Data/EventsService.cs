@@ -24,6 +24,13 @@ namespace EventsSystem.Services.Data
             return query.To<T>().ToList();
         }
 
+        public T GetById<T>(int id)
+        {
+            var ev = this.eventsRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return ev;
+        }
+
         public T GetByName<T>(string name)
         {
             var _event = this.eventsRepository.All().Where(x => x.Name == name.Replace("-", " "))

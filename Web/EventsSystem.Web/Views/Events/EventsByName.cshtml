@@ -32,8 +32,9 @@
     </div>
 
     <div class="media-body">
-        <a href="@Model.PlaceUrl"> @Model.PlaceUrl</a>
-        <h4 class="mt-0"><a href="@Model.PlaceUrl"> @Model.PlaceUrl</a> @Model.Place.Name</h4>
+        <h4 class="media-heading">
+        <a asp-controller="Places" asp-action="ById" asp-route-id="@Model.PlaceId">@Model.Place.Name</a>
+        </h4>
 
     </div>
 </div>
