@@ -38,7 +38,7 @@
 @section Scripts {
     <script>
         function sendVote(placeId, isUpVote) {
-            //var token = $("#votesForm input[name=__RequestVerificationToken]").val();
+            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
             var json = { placeId: placeId, isUpVote: isUpVote };
             $.ajax({
                 url: "/api/votes",
@@ -46,7 +46,7 @@
                 data: JSON.stringify(json),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                headers: { },
+                headers: { 'X-CSRF-TOKEN': token },
                 success: function (data) {
                     $("#votesCount").html(data.votesCount);
                     console.log(data.votesCount)
