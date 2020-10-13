@@ -110,14 +110,18 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("eventRoute", "/{name}", new {controller = "Events", action ="EventsByName" });
-                        endpoints.MapControllerRoute("eventRouteId", "event/{id}", new {controller = "Events", action = "ById" });
-                        endpoints.MapControllerRoute("placeRoute", "p/{name}", new {controller = "Places", action = "ByName" });
-                        endpoints.MapControllerRoute("placeRouteId", "place/{id}", new {controller = "Places", action = "ById" });
-                        endpoints.MapControllerRoute("eventForm", "/f/{name}", new {controller = "CreateEvent", action = "FillForm" });
-                        endpoints.MapControllerRoute("eventForm", "r/{name}", new {controller = "Review", action = "AddReviewToPlace" });
+
+                        //endpoints.MapControllerRoute("eventRoute", "/{name}", new { controller = "Events", action = "EventsByName" });
+                        endpoints.MapControllerRoute("allEvents", "page/", new { controller = "AllEvents", action = "ShowAllEvents" });
+                        endpoints.MapControllerRoute("eventRouteId", "event/{id}", new { controller = "Events", action = "ById" });
+                        endpoints.MapControllerRoute("placeRoute", "p/{name}", new { controller = "Places", action = "ByName" });
+                        endpoints.MapControllerRoute("placeRouteId", "place/{id}", new { controller = "Places", action = "ById" });
+                        endpoints.MapControllerRoute("eventForm", "/f/{name}", new { controller = "CreateEvent", action = "FillForm" });
+                        endpoints.MapControllerRoute("eventForm", "r/{name}", new { controller = "Review", action = "AddReviewToPlace" });
+                        // endpoints.MapControllerRoute("allEventsRouteWithPage", "/test/allEvents/{page:int}", new { controller = "AllEvents", action = "ShowAllEvents" });
+                        // endpoints.MapControllerRoute("allEventsRoute", "/test/allEvents", new { controller = "AllEvents", action = "ShowAllEvents" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
         }

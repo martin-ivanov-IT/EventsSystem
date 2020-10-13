@@ -8,8 +8,12 @@ namespace EventsSystem.Services.Data
     {
         IEnumerable<T> GetAll<T>(int? count = null);
 
+        IEnumerable<T> GetAll<T>(int? take = null, int skip = 0);
+
         T GetByName<T>(string name);
 
         T GetById<T>(int id);
+
+        int GetCount();
     }
 }

@@ -21,11 +21,11 @@
             this.EventsService = eventsService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string name)
         {
 
             var viewModel = new ViewModels.Home.IndexViewModel();
-            var events = this.EventsService.GetAll<IndexEventViewModel>();
+            var events = this.EventsService.GetAll<IndexEventViewModel>(5, 0);
 
             viewModel.Events = events;
 

@@ -25,6 +25,10 @@ namespace EventsSystem.Web.ViewModels.Home
 
         public int EntranceFee { get; set; }
 
+        public int PagesCount { get; set; }
+
+        public int CurrentPage { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Event, IndexEventViewModel>()

@@ -10,10 +10,11 @@
 <div class="media">
     @*<img class="mr-3" src="@ev.Place." width="100" height="100" alt="@ev.Name">*@
     <div class="media-body">
-       
+
         <h4><a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id">@ev.Name</a></h4>
 
     </div>
-</div>
-    }
+</div>}
+
+    <h4><a asp-controller="AllEvents" asp-action="ShowAllEvents" asp-route-page = "1"  class="btn btn-primary btn-lg ">See All Upcomming events</a></h4>
 </div>

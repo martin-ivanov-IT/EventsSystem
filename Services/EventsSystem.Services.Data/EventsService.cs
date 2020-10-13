@@ -24,6 +24,17 @@ namespace EventsSystem.Services.Data
             return query.To<T>().ToList();
         }
 
+        public IEnumerable<T> GetAll<T>(int? take = null, int skip = 0)
+        {
+            var query = this.eventsRepository.All().OrderByDescending(x => x.CreatedOn).Skip(skip);
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+            
+            return query.To<T>().ToList();
+        }
+
         public T GetById<T>(int id)
         {
             var ev = this.eventsRepository.All().Where(x => x.Id == id)
@@ -36,6 +47,11 @@ namespace EventsSystem.Services.Data
             var _event = this.eventsRepository.All().Where(x => x.Name == name.Replace("-", " "))
                    .To<T>().FirstOrDefault();
             return _event;
+        }
+
+        public int GetCount()
+        {
+            return this.eventsRepository.All().Count();
         }
     }
 }
