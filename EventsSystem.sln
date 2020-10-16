@@ -29,6 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsSystem.Web.Infrastruc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsSystem.Services.Data", "Services\EventsSystem.Services.Data\EventsSystem.Services.Data.csproj", "{4D39C126-3FB5-4B26-B08C-1BF48EFFA23E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{8522212F-F01E-4E20-9975-FCF5E10D71DB} = {8522212F-F01E-4E20-9975-FCF5E10D71DB}
 		{4B844ECB-E845-49A6-8B31-85E577933598} = {4B844ECB-E845-49A6-8B31-85E577933598}
 	EndProjectSection
 EndProject

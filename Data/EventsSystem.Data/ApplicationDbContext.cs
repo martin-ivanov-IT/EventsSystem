@@ -36,6 +36,8 @@
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<Friendship> Friendships { get; set; }
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -58,6 +60,17 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Friendship>()
+                  .HasOne(m => m.FriendFrom)
+                  .WithMany(t => t.FriendFroms)
+                  .HasForeignKey(m => m.FriendFromID);
+
+
+            builder.Entity<Friendship>()
+                        .HasOne(m => m.FriendTo)
+                        .WithMany(t => t.FriendTos)
+                        .HasForeignKey(m => m.FriendToID);
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

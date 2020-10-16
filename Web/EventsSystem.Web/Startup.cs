@@ -72,6 +72,7 @@
             services.AddTransient<IPlacesService, PlacesService>();
             services.AddTransient<IEventsService, EventsService>();
             services.AddTransient<IVotesService, VotesService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,10 +119,12 @@
                         endpoints.MapControllerRoute("placeRouteId", "place/{id}", new { controller = "Places", action = "ById" });
                         endpoints.MapControllerRoute("eventForm", "/f/{name}", new { controller = "CreateEvent", action = "FillForm" });
                         endpoints.MapControllerRoute("eventForm", "r/{name}", new { controller = "Review", action = "AddReviewToPlace" });
+                        endpoints.MapControllerRoute("Chat", "chats/", new { controller = "Chat", action = "Friends" });
                         // endpoints.MapControllerRoute("allEventsRouteWithPage", "/test/allEvents/{page:int}", new { controller = "AllEvents", action = "ShowAllEvents" });
                         // endpoints.MapControllerRoute("allEventsRoute", "/test/allEvents", new { controller = "AllEvents", action = "ShowAllEvents" });
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        
                         endpoints.MapRazorPages();
                     });
         }

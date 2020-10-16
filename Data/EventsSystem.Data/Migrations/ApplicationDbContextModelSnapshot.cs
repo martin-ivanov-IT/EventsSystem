@@ -247,6 +247,28 @@ namespace EventsSystem.Data.Migrations
                     b.ToTable("EventReviews");
                 });
 
+            modelBuilder.Entity("EventsSystem.Data.Models.Friendship", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FriendFromID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FriendToID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FriendFromID");
+
+                    b.HasIndex("FriendToID");
+
+                    b.ToTable("Friendships");
+                });
+
             modelBuilder.Entity("EventsSystem.Data.Models.Place", b =>
                 {
                     b.Property<int>("Id")
@@ -524,6 +546,17 @@ namespace EventsSystem.Data.Migrations
                     b.HasOne("EventsSystem.Data.Models.ApplicationUser", "User")
                         .WithMany("EventReviews")
                         .HasForeignKey("UserId1");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.Friendship", b =>
+                {
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "FriendFrom")
+                        .WithMany("FriendFroms")
+                        .HasForeignKey("FriendFromID");
+
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "FriendTo")
+                        .WithMany("FriendTos")
+                        .HasForeignKey("FriendToID");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.PlaceReview", b =>

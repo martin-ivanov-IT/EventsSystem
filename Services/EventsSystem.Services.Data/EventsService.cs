@@ -31,7 +31,6 @@ namespace EventsSystem.Services.Data
             {
                 query = query.Take(take.Value);
             }
-            
             return query.To<T>().ToList();
         }
 
