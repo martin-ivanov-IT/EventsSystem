@@ -38,6 +38,8 @@
 
         public DbSet<Friendship> Friendships { get; set; }
 
+        public DbSet<Message> Messages { get; set; }
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -65,11 +67,20 @@
                   .WithMany(t => t.FriendFroms)
                   .HasForeignKey(m => m.FriendFromID);
 
-
             builder.Entity<Friendship>()
                         .HasOne(m => m.FriendTo)
                         .WithMany(t => t.FriendTos)
                         .HasForeignKey(m => m.FriendToID);
+
+            builder.Entity<Message>()
+                  .HasOne(m => m.FriendshipFrom)
+                  .WithMany(t => t.FriendFromMessages)
+                  .HasForeignKey(m => m.FriendshipFromID);
+
+            builder.Entity<Message>()
+                 .HasOne(m => m.FriendshipTo)
+                 .WithMany(t => t.FriendToMessages)
+                 .HasForeignKey(m => m.FriendshipToID);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);

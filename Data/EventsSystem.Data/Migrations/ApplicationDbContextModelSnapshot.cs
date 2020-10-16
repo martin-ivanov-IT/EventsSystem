@@ -269,6 +269,31 @@ namespace EventsSystem.Data.Migrations
                     b.ToTable("Friendships");
                 });
 
+            modelBuilder.Entity("EventsSystem.Data.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FriendshipFromID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FriendshipToID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FriendshipFromID");
+
+                    b.HasIndex("FriendshipToID");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("EventsSystem.Data.Models.Place", b =>
                 {
                     b.Property<int>("Id")
@@ -557,6 +582,21 @@ namespace EventsSystem.Data.Migrations
                     b.HasOne("EventsSystem.Data.Models.ApplicationUser", "FriendTo")
                         .WithMany("FriendTos")
                         .HasForeignKey("FriendToID");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.Message", b =>
+                {
+                    b.HasOne("EventsSystem.Data.Models.Friendship", "FriendshipFrom")
+                        .WithMany("FriendFromMessages")
+                        .HasForeignKey("FriendshipFromID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EventsSystem.Data.Models.Friendship", "FriendshipTo")
+                        .WithMany("FriendToMessages")
+                        .HasForeignKey("FriendshipToID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.PlaceReview", b =>

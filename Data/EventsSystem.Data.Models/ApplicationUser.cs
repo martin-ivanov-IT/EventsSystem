@@ -19,7 +19,6 @@ namespace EventsSystem.Data.Models
             this.Events = new HashSet<Event>();
             this.FriendTos = new HashSet<Friendship>();
             this.FriendFroms = new HashSet<Friendship>();
-            
         }
 
         // Audit info
@@ -49,7 +48,5 @@ namespace EventsSystem.Data.Models
         public virtual ICollection<Friendship> FriendFroms { get; set; }
 
         public virtual ICollection<Friendship> FriendTos { get; set; }
-
-        
     }
 }

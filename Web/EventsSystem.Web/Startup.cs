@@ -11,6 +11,7 @@
     using EventsSystem.Services.Data;
     using EventsSystem.Services.Mapping;
     using EventsSystem.Services.Messaging;
+    using EventsSystem.Web.Hubs;
     using EventsSystem.Web.ViewModels;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -72,7 +73,7 @@
             services.AddTransient<IPlacesService, PlacesService>();
             services.AddTransient<IEventsService, EventsService>();
             services.AddTransient<IVotesService, VotesService>();
-            
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,8 +112,9 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chat");
 
-                        //endpoints.MapControllerRoute("eventRoute", "/{name}", new { controller = "Events", action = "EventsByName" });
+                        // endpoints.MapControllerRoute("eventRoute", "/{name}", new { controller = "Events", action = "EventsByName" });
                         endpoints.MapControllerRoute("allEvents", "page/", new { controller = "AllEvents", action = "ShowAllEvents" });
                         endpoints.MapControllerRoute("eventRouteId", "event/{id}", new { controller = "Events", action = "ById" });
                         endpoints.MapControllerRoute("placeRoute", "p/{name}", new { controller = "Places", action = "ByName" });
@@ -120,11 +122,11 @@
                         endpoints.MapControllerRoute("eventForm", "/f/{name}", new { controller = "CreateEvent", action = "FillForm" });
                         endpoints.MapControllerRoute("eventForm", "r/{name}", new { controller = "Review", action = "AddReviewToPlace" });
                         endpoints.MapControllerRoute("Chat", "chats/", new { controller = "Chat", action = "Friends" });
+
                         // endpoints.MapControllerRoute("allEventsRouteWithPage", "/test/allEvents/{page:int}", new { controller = "AllEvents", action = "ShowAllEvents" });
                         // endpoints.MapControllerRoute("allEventsRoute", "/test/allEvents", new { controller = "AllEvents", action = "ShowAllEvents" });
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        
                         endpoints.MapRazorPages();
                     });
         }
