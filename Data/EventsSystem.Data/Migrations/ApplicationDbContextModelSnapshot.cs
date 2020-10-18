@@ -254,17 +254,31 @@ namespace EventsSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FriendFromID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FriendToID")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FriendFromID");
 
                     b.HasIndex("FriendToID");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Friendships");
                 });
@@ -279,17 +293,31 @@ namespace EventsSystem.Data.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FriendshipFromID")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FriendshipID")
                         .HasColumnType("int");
 
-                    b.Property<int>("FriendshipToID")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FriendshipFromID");
+                    b.HasIndex("FriendshipID");
 
-                    b.HasIndex("FriendshipToID");
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Messages");
                 });
@@ -586,17 +614,15 @@ namespace EventsSystem.Data.Migrations
 
             modelBuilder.Entity("EventsSystem.Data.Models.Message", b =>
                 {
-                    b.HasOne("EventsSystem.Data.Models.Friendship", "FriendshipFrom")
-                        .WithMany("FriendFromMessages")
-                        .HasForeignKey("FriendshipFromID")
+                    b.HasOne("EventsSystem.Data.Models.Friendship", "Friendship")
+                        .WithMany("Messages")
+                        .HasForeignKey("FriendshipID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("EventsSystem.Data.Models.Friendship", "FriendshipTo")
-                        .WithMany("FriendToMessages")
-                        .HasForeignKey("FriendshipToID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("EventsSystem.Data.Models.ApplicationUser", "User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.PlaceReview", b =>

@@ -73,14 +73,14 @@
                         .HasForeignKey(m => m.FriendToID);
 
             builder.Entity<Message>()
-                  .HasOne(m => m.FriendshipFrom)
-                  .WithMany(t => t.FriendFromMessages)
-                  .HasForeignKey(m => m.FriendshipFromID);
+                  .HasOne(m => m.Friendship)
+                  .WithMany(t => t.Messages)
+                  .HasForeignKey(m => m.FriendshipID);
 
             builder.Entity<Message>()
-                 .HasOne(m => m.FriendshipTo)
-                 .WithMany(t => t.FriendToMessages)
-                 .HasForeignKey(m => m.FriendshipToID);
+                 .HasOne(m => m.User)
+                 .WithMany(t => t.Messages)
+                 .HasForeignKey(m => m.UserID);
 
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
