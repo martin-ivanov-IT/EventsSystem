@@ -34,6 +34,10 @@ namespace EventsSystem.Data.Models
 
         public string City { get; set; }
 
+        public string Surname { get; set; }
+
+        public string Lastname { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
