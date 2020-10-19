@@ -37,6 +37,7 @@ namespace EventsSystem.Data.Models
 
         public virtual ICollection<EventReview> Reviews { get; set; }
 
-        // many to many - users interested
+        public virtual ICollection<EventVote> Votes { get; set; }
+
     }
 }

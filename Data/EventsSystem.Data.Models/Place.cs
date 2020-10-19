@@ -11,7 +11,7 @@ namespace EventsSystem.Data.Models
         {
             this.Events = new HashSet<Event>();
             this.Reviews = new HashSet<PlaceReview>();
-            this.Votes = new HashSet<Vote>();
+            this.Votes = new HashSet<PlaceVote>();
         }
 
         public string Name { get; set; }
@@ -26,6 +26,6 @@ namespace EventsSystem.Data.Models
 
         public virtual ICollection<PlaceReview> Reviews { get; set; }
 
-        public virtual ICollection<Vote> Votes { get; set; }
+        public virtual ICollection<PlaceVote> Votes { get; set; }
     }
 }

@@ -72,7 +72,8 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IPlacesService, PlacesService>();
             services.AddTransient<IEventsService, EventsService>();
-            services.AddTransient<IVotesService, VotesService>();
+            services.AddTransient<IPlaceVotesService, PlaceVotesService>();
+            services.AddTransient<IEventVotesService, EventVotesService>();
             services.AddSignalR();
         }
 

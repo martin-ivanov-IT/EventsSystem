@@ -13,18 +13,20 @@ using EventsSystem.Web.ViewModels.Votes;
 namespace EventsSystem.Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class VotesController : ControllerBase
     {
-        private readonly IVotesService votesService;
+        private readonly IPlaceVotesService placeVotesService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEventVotesService eventVotesService;
 
         public VotesController(
-            IVotesService votesService,
-            UserManager<ApplicationUser> userManager)
+            IPlaceVotesService placeVotesService,
+            UserManager<ApplicationUser> userManager,
+            IEventVotesService eventVotesService)
         {
-            this.votesService = votesService;
+            this.placeVotesService = placeVotesService;
             this.userManager = userManager;
+            this.eventVotesService = eventVotesService;
         }
 
         // POST/api/votes
@@ -32,11 +34,23 @@ namespace EventsSystem.Web.Controllers
         // Response: {"votesCount" :16}
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel input)
+        [Route("api/[controller]place")]
+        public async Task<ActionResult<VoteResponseModel>> Post(PlaceVoteInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
-            await this.votesService.VoteAsync(input.PlaceId, userId, input.IsUpVote);
-            var votes = this.votesService.GetVotes(input.PlaceId);
+            await this.placeVotesService.VoteAsync(input.PlaceId, userId, input.IsUpVote);
+            var votes = this.placeVotesService.GetVotes(input.PlaceId);
+            return new VoteResponseModel { VotesCount = votes };
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/[controller]event")]
+        public async Task<ActionResult<VoteResponseModel>> PostEvent(EventVoteInputModel input)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            await this.eventVotesService.VoteAsync(input.EventId, userId, input.IsUpVote);
+            var votes = this.eventVotesService.GetVotes(input.EventId);
             return new VoteResponseModel { VotesCount = votes };
         }
     }

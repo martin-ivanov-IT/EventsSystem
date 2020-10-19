@@ -34,7 +34,7 @@
 
         public DbSet<EventReview> EventReviews { get; set; }
 
-        public DbSet<Vote> Votes { get; set; }
+        public DbSet<PlaceVote> Votes { get; set; }
 
         public DbSet<Friendship> Friendships { get; set; }
 
