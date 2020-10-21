@@ -31,6 +31,18 @@ namespace EventsSystem.Services.Data
             {
                 query = query.Take(take.Value);
             }
+
+            return query.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllByCity<T>(string city = null, int? take = null, int skip = 0)
+        {
+            var query = this.eventsRepository.All().Where(e => e.Place.City.Equals(city)).OrderByDescending(x => x.CreatedOn).Skip(skip);
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
             return query.To<T>().ToList();
         }
 

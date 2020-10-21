@@ -117,6 +117,7 @@
 
                         // endpoints.MapControllerRoute("eventRoute", "/{name}", new { controller = "Events", action = "EventsByName" });
                         endpoints.MapControllerRoute("allEvents", "page/", new { controller = "AllEvents", action = "ShowAllEvents" });
+                        endpoints.MapControllerRoute("allEventsByCity", "page/", new { controller = "Events", action = "ShowAllEventsByCity" });
                         endpoints.MapControllerRoute("eventRouteId", "event/{id}", new { controller = "Events", action = "ById" });
                         endpoints.MapControllerRoute("placeRoute", "p/{name}", new { controller = "Places", action = "ByName" });
                         endpoints.MapControllerRoute("placeRouteId", "place/{id}", new { controller = "Places", action = "ById" });

@@ -47,5 +47,11 @@
             return place;
         }
 
+        public IEnumerable<T> GetAllByCity<T>(string city, int? count = null)
+        {
+            IQueryable<Place> query = this.placesRepository.All().Where(p => p.City == city).OrderBy(x => x.Name);
+
+            return query.To<T>().ToList();
+        }
     };
 }

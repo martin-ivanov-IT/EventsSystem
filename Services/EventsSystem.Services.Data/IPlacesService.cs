@@ -8,6 +8,8 @@ namespace EventsSystem.Services.Data
     {
         IEnumerable<T> GetAll<T>(int? count = null);
 
+        IEnumerable<T> GetAllByCity<T>(string city, int? count = null);
+
         T GetByName<T>(string name);
 
         Place GetPlaceByName(string name);

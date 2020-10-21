@@ -11,22 +11,35 @@
     using Microsoft.AspNetCore.Mvc;
     using EventsSystem.Services.Mapping;
     using EventsSystem.Services.Data;
+    using Microsoft.AspNetCore.Identity;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
 
     public class HomeController : Controller
     {
+        private readonly UserManager<ApplicationUser> userManager;
+
         public IEventsService EventsService { get; }
 
-        public HomeController(IEventsService eventsService)
+        public HomeController(IEventsService eventsService, UserManager<ApplicationUser> userManager)
         {
             this.EventsService = eventsService;
+            this.userManager = userManager;
         }
 
-        public IActionResult Index(string name)
+        public async Task<IActionResult> Index(string name)
         {
-
+            bool isAuthenticated = this.User.Identity.IsAuthenticated;
             var viewModel = new ViewModels.Home.IndexViewModel();
-            var events = this.EventsService.GetAll<IndexEventViewModel>(5, 0);
+            if (isAuthenticated)
+            {
+                var user = await this.userManager.GetUserAsync(this.User);
+                string city = user.City;
+                var eventsByCity = this.EventsService.GetAllByCity<IndexEventViewModel>(city, 5, 0);
+                viewModel.EventsByCity = eventsByCity;
+            }
 
+            var events = this.EventsService.GetAll<IndexEventViewModel>(5, 0);
             viewModel.Events = events;
 
             return this.View(viewModel);
