@@ -14,6 +14,7 @@ namespace EventsSystem.Web.Controllers
     {
         private readonly IPlacesService placesService;
         private readonly UserManager<ApplicationUser> userManager;
+        private const int ItemsPerPage = 5;
 
         public PlacesController(IPlacesService placesService, UserManager<ApplicationUser> userManager)
         {
@@ -38,7 +39,7 @@ namespace EventsSystem.Web.Controllers
             return this.View(postViewModel);
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> TopPlaces()
         {
             bool isAuthenticated = this.User.Identity.IsAuthenticated;
             var viewModel = new PlaceAllViewModel();
@@ -46,14 +47,49 @@ namespace EventsSystem.Web.Controllers
             {
                 var user = await this.userManager.GetUserAsync(this.User);
                 string city = user.City;
-                var places = this.placesService.GetAllByCity<PlaceViewModel>(city);
-                viewModel.Places = places;
+                var places = this.placesService.GetAllByCity<PlaceViewModel>(city, 5, 0);
+                viewModel.PlacesByCity = places;
             }
-            else
+
+            var allPlaces = this.placesService.GetAll<PlaceViewModel>(5, 0);
+            viewModel.AllPlaces = allPlaces;
+
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult ShowAllPlacesByCity(int page)
+        {
+            var count = this.placesService.GetCount();
+
+            var viewModel = new PlaceAllViewModel();
+            var places = this.placesService.GetAll<PlaceViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
+            foreach (var place in places)
             {
-            var places = this.placesService.GetAll<PlaceViewModel>();
-            viewModel.Places = places;
+                place.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+
+                place.CurrentPage = page;
             }
+
+            viewModel.AllPlaces = places;
+
+            return this.View(viewModel);
+        }
+
+        public IActionResult ShowAllPlaces(int page)
+        {
+            var count = this.placesService.GetCount();
+
+            var viewModel = new PlaceAllViewModel();
+            var places = this.placesService.GetAll<PlaceViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
+            foreach (var place in places)
+            {
+                place.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+
+                place.CurrentPage = page;
+            }
+
+            viewModel.AllPlaces = places;
 
             return this.View(viewModel);
         }

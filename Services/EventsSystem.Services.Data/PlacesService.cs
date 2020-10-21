@@ -47,11 +47,31 @@
             return place;
         }
 
-        public IEnumerable<T> GetAllByCity<T>(string city, int? count = null)
+        public IEnumerable<T> GetAllByCity<T>(string city, int? take = null, int skip = 0)
         {
-            IQueryable<Place> query = this.placesRepository.All().Where(p => p.City == city).OrderBy(x => x.Name);
+            IQueryable<Place> query = this.placesRepository.All().Where(p => p.City == city).OrderBy(x => x.Name).Skip(skip);
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
 
-            return query.To<T>().ToList();
+            return query.To<T>().ToList(); 
         }
-    };
+
+        public IEnumerable<T> GetAll<T>(int? take = null, int skip = 0)
+        {
+            IQueryable<Place> query = this.placesRepository.All().OrderBy(x => x.Name).Skip(skip);
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query.To<T>().ToList(); 
+        }
+
+        public int GetCount()
+        {
+            return this.placesRepository.All().Count();
+        }
+    }
 }

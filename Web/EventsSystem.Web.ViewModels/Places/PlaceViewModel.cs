@@ -18,6 +18,10 @@ namespace EventsSystem.Web.ViewModels.Places
 
         public int VotesCount { get; set; }
 
+        public int PagesCount { get; set; }
+
+        public int CurrentPage { get; set; }
+
         public ICollection<PlaceReview> Reviews { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

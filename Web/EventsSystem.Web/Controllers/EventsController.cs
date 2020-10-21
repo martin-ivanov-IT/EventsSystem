@@ -69,6 +69,7 @@ namespace EventsSystem.Web.Controllers
             string city = user.City;
             var eventsByCity = this.eventsService.GetAllByCity<IndexEventViewModel>(city, 5, 0);
             viewModel.EventsByCity = eventsByCity;
+
             // var events = this.eventsService.GetAll<IndexEventViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
             foreach (var ev in eventsByCity)
             {
@@ -81,5 +82,7 @@ namespace EventsSystem.Web.Controllers
 
             return this.View(viewModel);
         }
+
+        
     }
 }
