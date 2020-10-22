@@ -17,5 +17,7 @@ namespace EventsSystem.Services.Data
         T GetById<T>(int id);
 
         int GetCount();
+
+        int GetCountAllPlacesByCity(string city);
     }
 }

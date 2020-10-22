@@ -62,15 +62,13 @@ namespace EventsSystem.Web.Controllers
         [Authorize]
         public async Task<IActionResult> ShowAllEventsByCity(int page)
         {
-            var count = this.eventsService.GetCount();
-
             var viewModel = new ViewModels.Home.IndexViewModel();
             var user = await this.userManager.GetUserAsync(this.User);
             string city = user.City;
-            var eventsByCity = this.eventsService.GetAllByCity<IndexEventViewModel>(city, 5, 0);
-            viewModel.EventsByCity = eventsByCity;
+            var count = this.eventsService.GetCountAllPlacesByCity(city);
 
-            // var events = this.eventsService.GetAll<IndexEventViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
+            var eventsByCity = this.eventsService.GetAllByCity<IndexEventViewModel>(city, ItemsPerPage, (page - 1) * ItemsPerPage);
+            viewModel.EventsByCity = eventsByCity;
             foreach (var ev in eventsByCity)
             {
                 ev.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
@@ -82,7 +80,5 @@ namespace EventsSystem.Web.Controllers
 
             return this.View(viewModel);
         }
-
-        
     }
 }

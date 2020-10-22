@@ -62,12 +62,13 @@ namespace EventsSystem.Web.Controllers
         [Authorize]
         public async Task<IActionResult> ShowAllPlacesByCity(int page)
         {
-            var count = this.placesService.GetCount();
             var user = await this.userManager.GetUserAsync(this.User);
             string city = user.City;
+            var count = this.placesService.GetCountAllPlacesByCity(city);
 
             var viewModel = new PlaceAllViewModel();
-            var places = this.placesService.GetAll<PlaceViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
+            
+            var places = this.placesService.GetAllByCity<PlaceViewModel>(city,ItemsPerPage, (page - 1) * ItemsPerPage);
             foreach (var place in places)
             {
                 place.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
@@ -75,7 +76,7 @@ namespace EventsSystem.Web.Controllers
                 place.CurrentPage = page;
             }
 
-            viewModel.AllPlaces = places;
+            viewModel.PlacesByCity = places;
 
             return this.View(viewModel);
         }

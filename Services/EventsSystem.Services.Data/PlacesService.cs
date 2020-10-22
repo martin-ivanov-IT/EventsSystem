@@ -73,5 +73,10 @@
         {
             return this.placesRepository.All().Count();
         }
+
+        public int GetCountAllPlacesByCity(string city)
+        {
+            return this.placesRepository.All().Where(p => p.City.Equals(city)).Count();
+        }
     }
 }

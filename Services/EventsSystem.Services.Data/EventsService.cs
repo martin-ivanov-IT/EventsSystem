@@ -64,5 +64,10 @@ namespace EventsSystem.Services.Data
         {
             return this.eventsRepository.All().Count();
         }
+
+        public int GetCountAllPlacesByCity(string city)
+        {
+            return this.eventsRepository.All().Where(e => e.Place.City.Equals(city)).Count();
+        }
     }
 }
