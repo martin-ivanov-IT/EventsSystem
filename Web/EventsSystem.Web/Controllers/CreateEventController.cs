@@ -41,22 +41,34 @@ namespace EventsSystem.Web.Controllers
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var ev = new Event
+            Place place;
 
+            var ev = new Event
             {
                 Name = input.Name,
                 Time = input.Time,
                 EntranceFee = input.EntranceFee,
                 EntranceType = input.EntranceType,
                 Description = input.Description,
-                Place = new Place {
-                    Address = input.PlaceCity,
-                    Name = input.Name,
-                    City = input.PlaceCity,
-                },
                 PlaceUrl = "p/" + input.Name.Replace(' ', '-'),
                 Initiator = user,
             };
+
+            if (this.Db.Places.Any(p => p.Name.Equals(input.PlaceName) && p.City.Equals(input.PlaceCity) && p.Address.Equals(input.PlaceCity)))
+            {
+                ev.Place = this.Db.Places.FirstOrDefault(p => p.Name.Equals(input.PlaceName));
+            }
+            else
+            {
+                ev.Place = new Place
+                {
+                    Address = input.PlaceCity,
+                    Name = input.PlaceName,
+                    City = input.PlaceCity,
+                };
+            }
+
+
 
             this.Db.Events.Add(ev);
             this.Db.SaveChanges();

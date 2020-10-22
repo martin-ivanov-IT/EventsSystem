@@ -1,6 +1,7 @@
 ﻿using EventsSystem.Data.Models;
 using EventsSystem.Services.Data;
 using EventsSystem.Web.ViewModels.Places;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -58,9 +59,12 @@ namespace EventsSystem.Web.Controllers
             return this.View(viewModel);
         }
 
-        public IActionResult ShowAllPlacesByCity(int page)
+        [Authorize]
+        public async Task<IActionResult> ShowAllPlacesByCity(int page)
         {
             var count = this.placesService.GetCount();
+            var user = await this.userManager.GetUserAsync(this.User);
+            string city = user.City;
 
             var viewModel = new PlaceAllViewModel();
             var places = this.placesService.GetAll<PlaceViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);

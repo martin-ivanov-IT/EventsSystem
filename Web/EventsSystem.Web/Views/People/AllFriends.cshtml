@@ -1,0 +1,13 @@
+﻿@using EventsSystem.Common
+@using Microsoft.AspNetCore.Identity;
+@model EventsSystem.Web.ViewModels.FriendShipViewModel;
+<h4 class="media-heading">
+    <a asp-controller="AddFriend" asp-action="AddPeopleByEmail">Add Friends</a>
+    @Model.FriendshipsModel.Count;
+</h4>
+
+@foreach (var friendship in Model.FriendshipsModel)
+{
+    <a asp-controller="Friendship" asp-action="ByEmail" asp-route-friendEmail="@friendship.FriendTo.Email">@friendship.FriendTo.Email</a>
+}
+

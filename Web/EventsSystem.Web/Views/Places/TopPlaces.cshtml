@@ -1,0 +1,36 @@
+﻿@model EventsSystem.Web.ViewModels.Places.PlaceAllViewModel
+@if (!User.Identity.IsAuthenticated)
+{
+    @foreach (var place in Model.AllPlaces)
+    {
+
+        <div class="media">
+
+            <div class="media-body">
+
+                <h4><a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
+
+            </div>
+        </div>
+    }
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @foreach (var place in Model.PlacesByCity)
+    {
+
+        <div class="media">
+
+            <div class="media-body">
+
+                <h4><a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
+
+            </div>
+        </div>
+    }
+}
+
+<h4><a asp-controller="Places" asp-action="ShowAllPlacesByCity" asp-route-page="1" class="btn btn-primary btn-lg ">See places in your city</a></h4>
+
+<h4><a asp-controller="Places" asp-action="ShowAllPlaces" asp-route-page="1" class="btn btn-primary btn-lg ">See places </a></h4>

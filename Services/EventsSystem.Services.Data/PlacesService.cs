@@ -66,7 +66,7 @@
                 query = query.Take(take.Value);
             }
 
-            return query.To<T>().ToList(); 
+            return query.To<T>().ToList();
         }
 
         public int GetCount()

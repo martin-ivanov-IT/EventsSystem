@@ -1,0 +1,13 @@
+﻿@model EventsSystem.Web.ViewModels.AddFriend.AddFriendInputModel
+@using EventsSystem.Web.ViewModels.AddFriend
+
+<form asp-controller="AddFriend" asp-action="AddPeopleByEmail" method="post" class="form">
+    <div class="input-group mb-3">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <div class="input-group-append">
+            <input type="submit" name="name" value="Create Event" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>

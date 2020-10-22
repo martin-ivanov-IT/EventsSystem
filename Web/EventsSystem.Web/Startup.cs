@@ -117,10 +117,10 @@
 
                         // endpoints.MapControllerRoute("eventRoute", "/{name}", new { controller = "Events", action = "EventsByName" });
                         //endpoints.MapControllerRoute("allEvents", "page/", new { controller = "AllEvents", action = "ShowAllEvents" });
-                        endpoints.MapControllerRoute("allPlacesByCity", "page/", new { controller = "Places", action = "ShowAllPlacesByCity" });
-                        endpoints.MapControllerRoute("allPlaces", "page/", new { controller = "Places", action = "ShowAllPlaces" });
-                        endpoints.MapControllerRoute("allEventsByCity", "page/", new { controller = "Events", action = "ShowAllEventsByCity" });
-                        endpoints.MapControllerRoute("allEvents", "page/", new { controller = "Events", action = "ShowAllEvents" });
+                        endpoints.MapControllerRoute("allPlacesByCity", "allplacesincity/page/", new { controller = "Places", action = "ShowAllPlacesByCity" });
+                        endpoints.MapControllerRoute("allPlaces", "allplaces/page/", new { controller = "Places", action = "ShowAllPlaces" });
+                        endpoints.MapControllerRoute("allEventsByCity", "alleventsincity/page/", new { controller = "Events", action = "ShowAllEventsByCity" });
+                        endpoints.MapControllerRoute("allEvents", "allevents/page/", new { controller = "Events", action = "ShowAllEvents" });
                         endpoints.MapControllerRoute("eventRouteId", "event/{id}", new { controller = "Events", action = "ById" });
                         endpoints.MapControllerRoute("placeRoute", "p/{name}", new { controller = "Places", action = "ByName" });
                         endpoints.MapControllerRoute("placeRouteId", "place/{id}", new { controller = "Places", action = "ById" });
