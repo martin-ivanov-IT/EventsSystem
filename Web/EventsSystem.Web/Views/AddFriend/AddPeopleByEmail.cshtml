@@ -3,11 +3,22 @@
 
 <form asp-controller="AddFriend" asp-action="AddPeopleByEmail" method="post" class="form">
     <div class="input-group mb-3">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
         <div class="input-group-append">
-            <input type="submit" name="name" value="Create Event" class="btn btn-outline-secondary" />
+            <input type="submit" name="name" value="Add to friends" class="btn btn-outline-secondary" />
         </div>
     </div>
 </form>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+
+}  

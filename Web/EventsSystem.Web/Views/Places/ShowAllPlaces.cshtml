@@ -7,7 +7,7 @@
         @*<img class="mr-3" src="@ev.Place." width="100" height="100" alt="@ev.Name">*@
         <div class="media-body">
 
-            <h4><a asp-controller="Events" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
+            <h4><a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
             <div>current Page @this.Model.AllPlaces.ElementAt(0).CurrentPage</div>
             <div>page Count @this.Model.AllPlaces.ElementAt(0).PagesCount</div>
 

@@ -1,19 +1,19 @@
 ﻿@using EventsSystem.Common
-@model EventsSystem.Web.ViewModels.Places.PlaceViewModel
+@model EventsSystem.Web.ViewModels.Places.PlaceWithEventViewModel
 
-<h1>@Model.Name</h1>
+<h1>@Model.Place.Name</h1>
 
-@Model.Name
+@Model.Place.Name
 <div class="text-muted small ml-3">
     <form id="votesForm" method="post"></form>
     <div>
-        <a href="#" onclick="sendVote(@Model.Id, true)">
+        <a href="#" onclick="sendVote(@Model.Place.Id, true)">
             <i class="fa fa-thumbs-up"></i>
         </a>
     </div>
-    <div id="votesCount">@Model.VotesCount</div>
+    <div id="votesCount">@Model.Place.VotesCount</div>
     <div>
-        <a href="#" onclick="sendVote(@Model.Id, false)">
+        <a href="#" onclick="sendVote(@Model.Place.Id, false)">
             <i class="fa fa-thumbs-down"></i>
         </a>
     </div>
@@ -21,16 +21,28 @@
 
 
 <p>You have been there leave review</p>
-<a href="@("/r/"+Model.Name.Replace(' ', '-'))"> leave Review </a>
+<a href="@("/r/"+Model.Place.Name.Replace(' ', '-'))"> leave Review </a>
 
-@if (Model.Reviews.Count > 0)
+@if (Model.Place.Reviews.Count > 0)
 {
     <h3>Reviews</h3>
-    @foreach (var rev in Model.Reviews)
+    @foreach (var rev in Model.Place.Reviews)
     {
         <hr />
         <div>@rev.Description</div>
 
+        <hr />
+    }
+}
+
+@if (Model.Events.Count() > 0)
+{
+    <h3>Events on this place</h3>
+    @foreach (var ev in Model.Events)
+    {
+        <hr />
+        <h4><a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id">@ev.Name</a></h4>
+        
         <hr />
     }
 }

@@ -8,6 +8,6 @@
 
 @foreach (var friendship in Model.FriendshipsModel)
 {
-    <a asp-controller="Friendship" asp-action="ByEmail" asp-route-friendEmail="@friendship.FriendTo.Email">@friendship.FriendTo.Email</a>
+    <a asp-controller="Friendship" asp-action="ByEmail" asp-route-friendEmail="@friendship.FriendTo.Email">@friendship.FriendTo.UserName</a>
 }
 

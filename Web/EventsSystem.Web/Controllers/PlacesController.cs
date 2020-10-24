@@ -1,5 +1,6 @@
 ﻿using EventsSystem.Data.Models;
 using EventsSystem.Services.Data;
+using EventsSystem.Web.ViewModels.Events;
 using EventsSystem.Web.ViewModels.Places;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,12 +16,17 @@ namespace EventsSystem.Web.Controllers
     {
         private readonly IPlacesService placesService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEventsService eventsService;
         private const int ItemsPerPage = 5;
 
-        public PlacesController(IPlacesService placesService, UserManager<ApplicationUser> userManager)
+        public PlacesController(
+            IPlacesService placesService,
+            UserManager<ApplicationUser> userManager,
+            IEventsService eventsService)
         {
             this.placesService = placesService;
             this.userManager = userManager;
+            this.eventsService = eventsService;
         }
 
         public IActionResult ByName(string name)
@@ -31,13 +37,17 @@ namespace EventsSystem.Web.Controllers
 
         public IActionResult ById(int id)
         {
-            var postViewModel = this.placesService.GetById<PlaceViewModel>(id);
-            if (postViewModel == null)
+            var placeViewModel = this.placesService.GetById<PlaceViewModel>(id);
+            if (placeViewModel == null)
             {
-                return this.NotFound();
+                this.RedirectToAction("Error", "Shared");
             }
 
-            return this.View(postViewModel);
+            var placeWithEventViewModel = new PlaceWithEventViewModel();
+            placeWithEventViewModel.Place = placeViewModel;
+            placeWithEventViewModel.Events = this.eventsService.GetAllByPlaceId<EventViewModel>(id);
+
+            return this.View(placeWithEventViewModel);
         }
 
         public async Task<IActionResult> TopPlaces()
@@ -67,8 +77,13 @@ namespace EventsSystem.Web.Controllers
             var count = this.placesService.GetCountAllPlacesByCity(city);
 
             var viewModel = new PlaceAllViewModel();
-            
             var places = this.placesService.GetAllByCity<PlaceViewModel>(city,ItemsPerPage, (page - 1) * ItemsPerPage);
+
+            if (places.Count() == 0)
+            {
+                return this.RedirectToAction("NoElements", "Shared");
+            }
+
             foreach (var place in places)
             {
                 place.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
@@ -87,6 +102,12 @@ namespace EventsSystem.Web.Controllers
 
             var viewModel = new PlaceAllViewModel();
             var places = this.placesService.GetAll<PlaceViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
+
+            if (places.Count() == 0)
+            {
+                return this.RedirectToAction("NoElements", "Shared");
+            }
+
             foreach (var place in places)
             {
                 place.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);

@@ -43,10 +43,15 @@ namespace EventsSystem.Web.Controllers
 
         public IActionResult ShowAllEvents(int page)
         {
-            var count = this.eventsService.GetCount();
+            var count = this.eventsService.GetCountAllUpcomingEvents();
 
             var viewModel = new ViewModels.Home.IndexViewModel();
             var events = this.eventsService.GetAll<IndexEventViewModel>(ItemsPerPage, (page - 1) * ItemsPerPage);
+            if (events.Count() == 0)
+            {
+                return this.RedirectToAction("NoElements", "Shared");
+            }
+
             foreach (var ev in events)
             {
                 ev.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
@@ -65,9 +70,14 @@ namespace EventsSystem.Web.Controllers
             var viewModel = new ViewModels.Home.IndexViewModel();
             var user = await this.userManager.GetUserAsync(this.User);
             string city = user.City;
-            var count = this.eventsService.GetCountAllPlacesByCity(city);
+            var count = this.eventsService.GetCountAllUpcomingEventsByCity(city);
 
             var eventsByCity = this.eventsService.GetAllByCity<IndexEventViewModel>(city, ItemsPerPage, (page - 1) * ItemsPerPage);
+            if (eventsByCity.Count() == 0)
+            {
+                return this.RedirectToAction("NoElements", "Shared");
+            }
+
             viewModel.EventsByCity = eventsByCity;
             foreach (var ev in eventsByCity)
             {
