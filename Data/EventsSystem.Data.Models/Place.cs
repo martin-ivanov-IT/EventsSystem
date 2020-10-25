@@ -12,6 +12,7 @@ namespace EventsSystem.Data.Models
             this.Events = new HashSet<Event>();
             this.Reviews = new HashSet<PlaceReview>();
             this.Votes = new HashSet<PlaceVote>();
+            this.Images = new HashSet<Image>();
         }
 
         public string Name { get; set; }
@@ -27,5 +28,7 @@ namespace EventsSystem.Data.Models
         public virtual ICollection<PlaceReview> Reviews { get; set; }
 
         public virtual ICollection<PlaceVote> Votes { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

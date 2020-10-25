@@ -1,4 +1,4 @@
-﻿namespace EventsSystem.Web.ViewModels.CreateEvent
+﻿namespace EventsSystem.Data.Models
 {
         public enum EntranceType
         {

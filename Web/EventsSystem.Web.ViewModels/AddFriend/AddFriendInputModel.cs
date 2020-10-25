@@ -11,7 +11,7 @@ namespace EventsSystem.Web.ViewModels.AddFriend
     public class AddFriendInputModel 
     {
         [Required]
-        [Display(Name = "Enter the email of your friend")]
-        public string Email { get; set; }
+        [Display(Name = "Enter the username of your friend")]
+        public string Username { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace EventsSystem.Web.ViewModels.Places
 
         public int CurrentPage { get; set; }
 
+        public ICollection<Image> Images { get; set; }
+
         public ICollection<PlaceReview> Reviews { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)

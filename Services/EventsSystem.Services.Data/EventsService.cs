@@ -19,14 +19,18 @@ namespace EventsSystem.Services.Data
 
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
-            IQueryable<Event> query = this.eventsRepository.All().OrderBy(x => x.Name);
+            IQueryable<Event> query = this.eventsRepository.All().OrderByDescending(x => x.Votes.Count);
 
             return query.To<T>().ToList();
         }
 
         public IEnumerable<T> GetAll<T>(int? take = null, int skip = 0)
         {
-            var query = this.eventsRepository.All().OrderByDescending(x => x.CreatedOn).Skip(skip);
+            DateTime localDate = DateTime.Now;
+            var query = this.eventsRepository.All()
+                .Where(e => e.Time.CompareTo(localDate) > 0)
+                .OrderByDescending(x => x.Votes.Count)
+                .Skip(skip);
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
@@ -37,11 +41,24 @@ namespace EventsSystem.Services.Data
 
         public IEnumerable<T> GetAllByCity<T>(string city = null, int? take = null, int skip = 0)
         {
-            var query = this.eventsRepository.All().Where(e => e.Place.City.Equals(city)).OrderByDescending(x => x.CreatedOn).Skip(skip);
+            DateTime localDate = DateTime.Now;
+            var query = this.eventsRepository
+                .All()
+                .Where(e => e.Place.City
+                .Equals(city) && e.Time.CompareTo(localDate) > 0)
+                .OrderByDescending(x => x.Votes.Count)
+                .Skip(skip);
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
             }
+
+            return query.To<T>().ToList();
+        }
+
+        public IEnumerable<T> GetAllByPlaceId<T>(int placeId)
+        {
+            IQueryable<Event> query = this.eventsRepository.All().Where(e => e.PlaceId == placeId).OrderByDescending(x => x.Votes.Count);
 
             return query.To<T>().ToList();
         }
@@ -68,6 +85,26 @@ namespace EventsSystem.Services.Data
         public int GetCountAllPlacesByCity(string city)
         {
             return this.eventsRepository.All().Where(e => e.Place.City.Equals(city)).Count();
+        }
+
+        public int GetCountAllUpcomingEvents()
+        {
+            DateTime localDate = DateTime.Now;
+
+            return this.eventsRepository
+                .All()
+                .Where(e => e.Time.CompareTo(localDate) > 0)
+                .Count();
+        }
+
+        public int GetCountAllUpcomingEventsByCity(string city)
+        {
+            DateTime localDate = DateTime.Now;
+
+            return this.eventsRepository
+                .All()
+                .Where(e => e.Place.City.Equals(city) && e.Time.CompareTo(localDate) > 0)
+                .Count();
         }
     }
 }

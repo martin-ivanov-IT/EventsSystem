@@ -18,6 +18,10 @@ namespace EventsSystem.Services.Data
 
         int GetCount();
 
-        int GetCountAllPlacesByCity(string city);
+        int GetCountAllUpcomingEvents();
+
+        int GetCountAllUpcomingEventsByCity(string city);
+
+        IEnumerable<T> GetAllByPlaceId<T>(int placeId);
     }
 }

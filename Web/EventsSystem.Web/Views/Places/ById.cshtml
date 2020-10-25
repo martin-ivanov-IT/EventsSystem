@@ -35,6 +35,7 @@
     }
 }
 
+
 @if (Model.Events.Count() > 0)
 {
     <h3>Events on this place</h3>
@@ -42,10 +43,23 @@
     {
         <hr />
         <h4><a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id">@ev.Name</a></h4>
-        
+
         <hr />
     }
 }
+
+@if (Model.Place.Images.Count() > 0)
+{
+    @foreach (var image in Model.Place.Images)
+    {
+        <img src="@Url.Content($"~/{image.Path}")" width="500" height="600" />
+        <hr />
+    }
+    
+
+
+}
+
 
 @section Scripts {
     <script>

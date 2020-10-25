@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EventsSystem.Data.Models;
 using EventsSystem.Services.Mapping;
-using EventsSystem.Web.ViewModels.CreateEvent;
 using Ganss.XSS;
 using System;
 using System.Collections.Generic;

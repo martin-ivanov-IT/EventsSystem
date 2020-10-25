@@ -8,7 +8,6 @@
     using AutoMapper;
     using EventsSystem.Data.Models;
     using EventsSystem.Services.Mapping;
-    using EventsSystem.Web.ViewModels.CreateEvent;
     using EventsSystem.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Http;
 
@@ -37,7 +36,7 @@
         [Required]
         public string PlaceName { get; set; }
 
-        public IFormFile Photo { get; set; }
+        public IEnumerable <IFormFile> Photos { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

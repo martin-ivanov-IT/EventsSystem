@@ -21,7 +21,7 @@
 
         public IEnumerable<T> GetAll<T>(int? count = null)
         {
-            IQueryable<Place> query = this.placesRepository.All().OrderBy(x => x.Name);
+            IQueryable<Place> query = this.placesRepository.All().OrderByDescending(x => x.Events.Count);
 
             return query.To<T>().ToList();
         }
@@ -49,18 +49,18 @@
 
         public IEnumerable<T> GetAllByCity<T>(string city, int? take = null, int skip = 0)
         {
-            IQueryable<Place> query = this.placesRepository.All().Where(p => p.City == city).OrderBy(x => x.Name).Skip(skip);
+            IQueryable<Place> query = this.placesRepository.All().Where(p => p.City == city).OrderByDescending(x => x.Events.Count).Skip(skip);
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
             }
 
-            return query.To<T>().ToList(); 
+            return query.To<T>().ToList();
         }
 
         public IEnumerable<T> GetAll<T>(int? take = null, int skip = 0)
         {
-            IQueryable<Place> query = this.placesRepository.All().OrderBy(x => x.Name).Skip(skip);
+            IQueryable<Place> query = this.placesRepository.All().OrderByDescending(x => x.Events.Count).Skip(skip);
             if (take.HasValue)
             {
                 query = query.Take(take.Value);

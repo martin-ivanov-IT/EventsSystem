@@ -42,15 +42,6 @@
                 return this.View(input);
             }
 
-            var fileFolder = "..\\Users";
-            System.IO.Directory.CreateDirectory(fileFolder);
-
-            var filePath = "..\\Users\\photo3.jpg ";
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await input.Photo.CopyToAsync(fileStream);
-            }
-
             var user = await this.userManager.GetUserAsync(this.User);
 
             var ev = new Event
@@ -63,6 +54,7 @@
                 PlaceUrl = "p/" + input.Name.Replace(' ', '-'),
                 Initiator = user,
             };
+
             if (this.Db.Places.Any(p => p.Name.Equals(input.PlaceName) && p.City.Equals(input.PlaceCity) && p.Address.Equals(input.PlaceCity)))
             {
                 ev.Place = this.Db.Places.FirstOrDefault(p => p.Name.Equals(input.PlaceName));
@@ -77,7 +69,28 @@
                 };
             }
 
+            var expectedFileExt = new[] { ".jpg", ".jpeg" };
+            if (input.Photos != null)
+            {
+                foreach (var photo in input.Photos)
+                {
+                    if (expectedFileExt.Any(x => photo.FileName.EndsWith(x)))
+                    {
+                        var fileFolder = $"wwwroot\\images\\{input.PlaceName}";
+                        System.IO.Directory.CreateDirectory(fileFolder);
+                        var path = $"{fileFolder}\\{photo.FileName}";
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await photo.CopyToAsync(fileStream);
+                        }
 
+                        ev.Place.Images.Add(new Image
+                        {
+                            Path = $"images\\{input.PlaceName}\\{photo.FileName}",
+                        });
+                    }
+                }
+            }
 
             this.Db.Events.Add(ev);
             this.Db.SaveChanges();

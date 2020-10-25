@@ -1,5 +1,7 @@
-﻿@model EventsSystem.Web.ViewModels.CreateEvent.CreateEventInputModel
-@using EventsSystem.Web.ViewModels.CreateEvent
+﻿@model EventsSystem.Web.InputModels.CreateEventInputModel
+@using EventsSystem.Data.Models
+
+
 <link href="~/css/FillForm.css" rel="stylesheet" type="text/css" />
 
 
@@ -28,7 +30,7 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
-        <div >
+        <div>
             <label asp-for="Description"></label>
             <textarea asp-for="Description" class="form-control"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
@@ -69,7 +71,13 @@
             <span asp-validation-for="PlaceName" class="text-danger"></span>
         </div>
 
-        <input type="file" name="Photo" value=""  multiple/>
+        <div class="form-group">
+            <label asp-for="Photos"></label>
+            <input asp-for="Photos" class="form-control" />
+            <span asp-validation-for="Photos" class="text-danger"></span>
+        </div>
+
+
 
         <hr />
 

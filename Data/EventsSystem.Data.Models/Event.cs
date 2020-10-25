@@ -1,5 +1,4 @@
 ﻿using EventsSystem.Data.Common.Models;
-using EventsSystem.Web.ViewModels.CreateEvent;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
