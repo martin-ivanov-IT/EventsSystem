@@ -10,7 +10,7 @@
                     @foreach (var place in Model.AllPlaces)
                     {
 
-                        <a asp-controller="Events" asp-action="ById" asp-route-id="@place.Id" class="mb-4 mt-4 col-md-4 list-group-item list-group-item-action flex-column align-items-start active">
+                        <a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id" class="mb-4 mt-4 col-md-4 list-group-item list-group-item-action flex-column align-items-start active">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">@place.Name</h5>
 

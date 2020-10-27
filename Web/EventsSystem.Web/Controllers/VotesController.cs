@@ -1,17 +1,18 @@
-﻿using EventsSystem.Data.Models;
-using EventsSystem.Web.Views.Votes;
-using EventsSystem.Services.Data;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EventsSystem.Web.ViewModels.Votes;
-
-namespace EventsSystem.Web.Controllers
+﻿namespace EventsSystem.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Data;
+    using EventsSystem.Web.ViewModels.Votes;
+    using EventsSystem.Web.Views.Votes;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
     public class VotesController : ControllerBase
     {

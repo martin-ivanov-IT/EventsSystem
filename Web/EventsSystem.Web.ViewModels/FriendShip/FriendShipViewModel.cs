@@ -1,10 +1,11 @@
-﻿using EventsSystem.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Web.ViewModels
+﻿namespace EventsSystem.Web.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using EventsSystem.Data.Models;
+
     public class FriendShipViewModel
     {
         public FriendShipViewModel()

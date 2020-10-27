@@ -1,12 +1,13 @@
-﻿using AutoMapper;
-using EventsSystem.Data.Models;
-using EventsSystem.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Web.ViewModels.Home
+﻿namespace EventsSystem.Web.ViewModels.Home
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using AutoMapper;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Mapping;
+
    public class IndexEventViewModel : IMapFrom<Event>, IHaveCustomMappings
     {
         public int Id { get; set; }
@@ -18,6 +19,8 @@ namespace EventsSystem.Web.ViewModels.Home
         public DateTime Time { get; set; }
 
         public virtual Place Place { get; set; }
+
+        public IEnumerable<Image> PlaceImages { get; set; }
 
         public string Url { get; set; }
 
@@ -36,6 +39,13 @@ namespace EventsSystem.Web.ViewModels.Home
                              x => x.Url,
                              c => c.MapFrom(e => "/" + e.Name.Replace(' ', '-')));
 
+            configuration.CreateMap<Place, IndexEventViewModel>()
+                         .ForMember(
+                             x => x.PlaceImages,
+                             c => c.MapFrom(e => new Place
+                             {
+                             Images = e.Images,
+                             }));
         }
     }
 }

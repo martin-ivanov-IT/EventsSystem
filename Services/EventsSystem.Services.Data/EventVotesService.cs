@@ -1,14 +1,15 @@
-﻿using AngleSharp.Dom.Events;
-using EventsSystem.Data.Common.Repositories;
-using EventsSystem.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EventsSystem.Services.Data
+﻿namespace EventsSystem.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using AngleSharp.Dom.Events;
+    using EventsSystem.Data.Common.Repositories;
+    using EventsSystem.Data.Models;
+
     public class EventVotesService : IEventVotesService
     {
         private readonly IRepository<EventVote> votesRepository;

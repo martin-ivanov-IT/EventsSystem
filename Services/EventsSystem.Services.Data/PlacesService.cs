@@ -8,7 +8,6 @@
     using EventsSystem.Data.Common.Repositories;
     using EventsSystem.Data.Models;
     using EventsSystem.Services.Mapping;
-   
 
     public class PlacesService : IPlacesService
     {

@@ -1,11 +1,12 @@
-﻿using EventsSystem.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace EventsSystem.Data.Models
+﻿namespace EventsSystem.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
+    using EventsSystem.Data.Common.Models;
+
     public class EventVote : BaseModel<int>
     {
         public int EventId { get; set; }

@@ -4,18 +4,17 @@
             <h3 class="display-4 mt-3 ">All places</h3>
             @foreach (var place in Model.AllPlaces)
             {
+                <div class="list-group ">
+                    <a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id" class=" col-md-5 mt-3 mb-2 list-group-item list-group-item-action flex-column align-items-start active">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@place.Name</h5>
+                        </div>
+                    </a>
+                </div>
 
-                <div class="media">
-                    @*<img class="mr-3" src="@ev.Place." width="100" height="100" alt="@ev.Name">*@
-                    <div class="media-body">
+            }
 
-                        <h4><a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
-                        <div>current Page @this.Model.AllPlaces.ElementAt(0).CurrentPage</div>
-                        <div>page Count @this.Model.AllPlaces.ElementAt(0).PagesCount</div>
-
-                    </div>
-                </div>}
-
+        </div>
             <nav>
                 <ul class="pagination justify-content-center">
                     @if (this.Model.AllPlaces.ElementAt(0).CurrentPage == 1)
@@ -59,7 +58,7 @@
                     }
                 </ul>
             </nav>
-        </div>
+        
     </section>
 
     <section class="page-section" id="contact">

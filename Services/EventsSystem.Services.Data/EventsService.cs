@@ -1,13 +1,14 @@
-﻿using EventsSystem.Data.Common.Repositories;
-using EventsSystem.Data.Models;
-using EventsSystem.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EventsSystem.Services.Data
+﻿namespace EventsSystem.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using EventsSystem.Data.Common.Repositories;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Mapping;
+
     public class EventsService : IEventsService
     {
         private readonly IDeletableEntityRepository<Event> eventsRepository;

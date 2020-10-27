@@ -7,58 +7,20 @@
         @if (User.Identity.IsAuthenticated)
         {
 
-            
-        <section class="page-section portfolio" id="portfolio">
-            <div class="btn-group mb-3">
-                <a asp-controller="Events" asp-action="ShowAllEventsByCity" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events in your city</a>
 
-                <a asp-controller="Events" asp-action="ShowAllEvents" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events </a>
-
-            </div>
-            <div class="row ">
-
-                @foreach (var ev in Model.EventsByCity)
-                {
-
-                    <div class="col-md-4  mt-3">
-                        @*<div>@ev.Name</div>*@
-
-                        <div class="card-deck">
-                            <div class="card " style="width: 18rem;">
-                                <img src="@Url.Content($"~/{ev.PlaceImages.First().Path}")" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">@ev.Name</h5>
-                                    <div class="card-footer text-muted">
-                                        @ev.Time
-                                    </div>
-
-
-
-                                </div>
-                                <a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id" class="btn btn-primary stretched-link">See more</a>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                }
-
-            </div>
-        </section>
-        }
-
-
-
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <h1>  Viral upcomming events  </h1>
             <section class="page-section portfolio" id="portfolio">
+                <div class="btn-group mb-3">
+                    <a asp-controller="Events" asp-action="ShowAllEventsByCity" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events in your city</a>
+
+                    <a asp-controller="Events" asp-action="ShowAllEvents" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events </a>
+
+                </div>
                 <div class="row ">
-                    @foreach (var ev in Model.Events)
+
+                    @foreach (var ev in Model.EventsByCity)
                     {
 
-                        <div class="col-md-4 mt-3">
+                        <div class="col-md-4  mt-3">
                             @*<div>@ev.Name</div>*@
 
                             <div class="card-deck">
@@ -80,17 +42,64 @@
 
                         </div>
 
-
                     }
+
 
                 </div>
             </section>
-
-
-
         }
 
-    
+
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+    <section class="page-section portfolio" id="portfolio">
+        <div class="btn-group mb-3">
+            <a asp-controller="Events" asp-action="ShowAllEventsByCity" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events in your city</a>
+
+            <a asp-controller="Events" asp-action="ShowAllEvents" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events </a>
+
+        </div>
+        <section class="page-section portfolio" id="portfolio">
+            <div class="row ">
+
+                @foreach (var ev in Model.Events)
+                {
+
+                    <div class="col-md-4 mt-3">
+                        @*<div>@ev.Name</div>*@
+
+                        <div class="card-deck">
+                            <div class="card " style="width: 18rem;">
+                                <img src="@Url.Content($"~/{ev.PlaceImages.First().Path}")" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">@ev.Name</h5>
+                                    <div class="card-footer text-muted">
+                                        @ev.Time
+                                    </div>
+
+
+
+                                </div>
+                                <a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id" class="btn btn-primary stretched-link">See more</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                }
+
+
+            </div>
+        </section>
+
+
+    </section>
+                }
+
+
         </div>
 </section>
 

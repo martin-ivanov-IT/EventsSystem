@@ -1,10 +1,11 @@
-﻿using EventsSystem.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Web.ViewModels.AllFreinds
+﻿namespace EventsSystem.Web.ViewModels.AllFreinds
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using EventsSystem.Data.Models;
+
     public class AllFriendsViewModel
     {
         public IEnumerable<FriendViewModel> Friends { get; set; }

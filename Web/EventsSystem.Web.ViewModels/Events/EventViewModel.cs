@@ -1,14 +1,15 @@
-﻿using AutoMapper;
-using EventsSystem.Data.Models;
-using EventsSystem.Services.Mapping;
-using Ganss.XSS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EventsSystem.Web.ViewModels.Events
+﻿namespace EventsSystem.Web.ViewModels.Events
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using AutoMapper;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Mapping;
+    using Ganss.XSS;
+
    public class EventViewModel : IMapFrom<Event>
     {
         public int Id { get; set; }
@@ -22,6 +23,8 @@ namespace EventsSystem.Web.ViewModels.Events
         public DateTime Time { get; set; }
 
         public virtual Place Place { get; set; }
+
+        public IEnumerable<Image> PlaceImages { get; set; }
 
         public int PlaceId { get; set; }
 
@@ -40,6 +43,13 @@ namespace EventsSystem.Web.ViewModels.Events
                          {
                              options.MapFrom(p => p.Votes.Sum(v => (int)v.Type));
                          });
+            configuration.CreateMap<Place, EventViewModel>()
+                         .ForMember(
+                             x => x.PlaceImages,
+                             c => c.MapFrom(e => new Place
+                             {
+                                 Images = e.Images,
+                             }));
         }
     }
 }

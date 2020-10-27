@@ -1,13 +1,14 @@
-﻿using AutoMapper;
-using EventsSystem.Data.Models;
-using EventsSystem.Services.Mapping;
-using EventsSystem.Web.ViewModels.Home;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Web.ViewModels.Events
+﻿namespace EventsSystem.Web.ViewModels.Events
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using AutoMapper;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Mapping;
+    using EventsSystem.Web.ViewModels.Home;
+
     public class EventPlaceViewModel : IMapFrom<Place>, IHaveCustomMappings
     {
         public string Name { get; set; }

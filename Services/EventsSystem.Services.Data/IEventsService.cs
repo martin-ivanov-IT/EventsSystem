@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Services.Data
+﻿namespace EventsSystem.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface IEventsService
     {
         IEnumerable<T> GetAll<T>(int? count = null);

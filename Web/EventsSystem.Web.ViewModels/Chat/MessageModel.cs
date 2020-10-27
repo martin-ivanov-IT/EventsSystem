@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Web.ViewModels.Chat
+﻿namespace EventsSystem.Web.ViewModels.Chat
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class MessageModel
     {
         public string User { get; set; }

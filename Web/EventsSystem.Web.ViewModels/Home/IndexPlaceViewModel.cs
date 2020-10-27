@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using EventsSystem.Data.Models;
-using EventsSystem.Services.Mapping;
-
-namespace EventsSystem.Web.ViewModels.Home
+﻿namespace EventsSystem.Web.ViewModels.Home
 {
+    using AutoMapper;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Mapping;
+
     public class IndexPlaceViewModel : IMapFrom<Place>, IHaveCustomMappings
     {
         public string Name { get; set; }

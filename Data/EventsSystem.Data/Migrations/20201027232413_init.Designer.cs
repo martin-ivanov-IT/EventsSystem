@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventsSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201018235433_init")]
+    [Migration("20201027232413_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -321,6 +321,40 @@ namespace EventsSystem.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Friendships");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlaceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlaceId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.Message", b =>
@@ -665,6 +699,15 @@ namespace EventsSystem.Data.Migrations
                     b.HasOne("EventsSystem.Data.Models.ApplicationUser", "FriendTo")
                         .WithMany("FriendTos")
                         .HasForeignKey("FriendToID");
+                });
+
+            modelBuilder.Entity("EventsSystem.Data.Models.Image", b =>
+                {
+                    b.HasOne("EventsSystem.Data.Models.Place", "Place")
+                        .WithMany("Images")
+                        .HasForeignKey("PlaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EventsSystem.Data.Models.Message", b =>

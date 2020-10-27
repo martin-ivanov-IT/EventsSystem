@@ -1,9 +1,10 @@
-﻿using EventsSystem.Data.Models;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EventsSystem.Services.Data
+﻿namespace EventsSystem.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Text;
+
+    using EventsSystem.Data.Models;
+
     public interface IPlacesService
     {
         IEnumerable<T> GetAll<T>(int? count = null);
