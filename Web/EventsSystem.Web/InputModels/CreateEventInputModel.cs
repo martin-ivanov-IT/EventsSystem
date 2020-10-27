@@ -36,7 +36,7 @@
         [Required]
         public string PlaceName { get; set; }
 
-        public IEnumerable <IFormFile> Photos { get; set; }
+        public IEnumerable<IFormFile> Photos { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

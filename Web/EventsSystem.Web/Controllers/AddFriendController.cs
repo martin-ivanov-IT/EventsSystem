@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EventsSystem.Web.ViewModels.AddFriend;
-using EventsSystem.Data;
-using EventsSystem.Data.Models;
-using Microsoft.AspNetCore.Identity;
-
-namespace EventsSystem.Web.Controllers
+﻿namespace EventsSystem.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EventsSystem.Data;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Web.ViewModels.AddFriend;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class AddFriendController : Controller
     {
         private readonly ApplicationDbContext db;
@@ -45,16 +46,14 @@ namespace EventsSystem.Web.Controllers
 
             if (friend == null)
             {
-                this.ModelState.AddModelError("Username", "not found...");
+                this.ModelState.AddModelError("Username", $"{input.Username} not found");
             }
 
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);
             }
-
-            // this.ViewBag.Message = "user not found";
-
+            // add to database
             var friendShip = new Friendship
             {
                 FriendFrom = user,

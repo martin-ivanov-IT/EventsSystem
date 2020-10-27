@@ -1,13 +1,14 @@
-﻿using EventsSystem.Services.Data;
-using EventsSystem.Web.ViewModels.Home;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EventsSystem.Web.Controllers
+﻿namespace EventsSystem.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EventsSystem.Services.Data;
+    using EventsSystem.Web.ViewModels.Home;
+    using Microsoft.AspNetCore.Mvc;
+
     public class AllEventsController : Controller
     {
         private const int ItemsPerPage = 5;
@@ -28,7 +29,7 @@ namespace EventsSystem.Web.Controllers
             foreach (var ev in events)
             {
                 ev.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
-                
+
                 // maybe wrong
                 ev.CurrentPage = page;
             }

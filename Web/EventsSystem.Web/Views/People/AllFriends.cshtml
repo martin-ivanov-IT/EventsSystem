@@ -1,13 +1,34 @@
 ﻿@using EventsSystem.Common
 @using Microsoft.AspNetCore.Identity;
 @model EventsSystem.Web.ViewModels.FriendShipViewModel;
-<h4 class="media-heading">
-    <a asp-controller="AddFriend" asp-action="AddPeopleByEmail">Add Friends</a>
-    @Model.FriendshipsModel.Count;
-</h4>
+<section class="page-section portfolio ">
+   
+    <div class="container">
 
-@foreach (var friendship in Model.FriendshipsModel)
-{
-    <a asp-controller="Friendship" asp-action="ByEmail" asp-route-friendEmail="@friendship.FriendTo.Email">@friendship.FriendTo.UserName</a>
-}
+        <h4 class="media-heading">
+            <a asp-controller="AddFriend" asp-action="AddPeopleByEmail" class="btn btn-outline-primary btn-lg mt-5">Add Friends</a>
+
+        </h4>
+       
+        @foreach (var friendship in Model.FriendshipsModel)
+        {
+            <div class="list-group ">
+                <a asp-controller="Friendship" asp-action="ByEmail" asp-route-friendEmail="@friendship.FriendTo.Email" class="col-md-5 mt-1 mb-2 list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@($"{friendship.FriendTo.Surname} {friendship.FriendTo.Lastname}" )</h5>
+                        <small>@friendship.FriendTo.UserName</small>
+                    </div>
+
+                </a>
+            </div>
+
+
+        }
+
+    </div>
+
+</section>
+
+<section class="page-section" id="contact">
+</section>
 

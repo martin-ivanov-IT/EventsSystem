@@ -1,36 +1,55 @@
 ﻿@model EventsSystem.Web.ViewModels.Places.PlaceAllViewModel
-@if (!User.Identity.IsAuthenticated)
-{
-    @foreach (var place in Model.AllPlaces)
-    {
+    <section class="page-section portfolio ">
+        <div class="container">
 
-        <div class="media">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <h3 class="display-4 mt-3 ">Top 5 places</h3>
+                @if (Model.AllPlaces.Count() > 0)
+                {
+                    @foreach (var place in Model.AllPlaces)
+                    {
 
-            <div class="media-body">
+                        <a asp-controller="Events" asp-action="ById" asp-route-id="@place.Id" class="mb-4 mt-4 col-md-4 list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@place.Name</h5>
 
-                <h4><a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
+                            </div>
+                            <small>@place.Address</small>
+                        </a>
+                    }
+                }
 
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                
+                @if (Model.PlacesByCity.Count() > 0)
+                {
+                    <h3 class="display-4 mt-3">Top 5 places in @Model.PlacesByCity.First().Address</h3>
+                    @foreach (var place in Model.PlacesByCity)
+                    {
+
+                        <a asp-controller="Events" asp-action="ById" asp-route-id="@place.Id" class="mb-4 mt-4 col-md-4 list-group-item list-group-item-action flex-column align-items-start active">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@place.Name</h5>
+
+                            </div>
+                            <small>@place.Address</small>
+                        </a>
+                    }
+                }
+
+            }
+            <div class="btn-group mt-4">
+                <a asp-controller="Places" asp-action="ShowAllPlacesByCity" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See places in your city</a></h4>
+
+                <a asp-controller="Places" asp-action="ShowAllPlaces" asp-route-page="1" class="  btn btn-outline-primary btn-lg ">See places </a></h4>
             </div>
         </div>
-    }
-}
+            }
+</section>
 
-@if (User.Identity.IsAuthenticated)
-{
-    @foreach (var place in Model.PlacesByCity)
-    {
-
-        <div class="media">
-
-            <div class="media-body">
-
-                <h4><a asp-controller="Places" asp-action="ById" asp-route-id="@place.Id">@place.Name</a></h4>
-
-            </div>
-        </div>
-    }
-}
-
-<h4><a asp-controller="Places" asp-action="ShowAllPlacesByCity" asp-route-page="1" class="btn btn-primary btn-lg ">See places in your city</a></h4>
-
-<h4><a asp-controller="Places" asp-action="ShowAllPlaces" asp-route-page="1" class="btn btn-primary btn-lg ">See places </a></h4>
+    <section class="page-section" id="contact">
+    </section>

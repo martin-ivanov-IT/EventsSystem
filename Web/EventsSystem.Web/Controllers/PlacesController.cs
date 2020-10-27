@@ -1,17 +1,18 @@
-﻿using EventsSystem.Data.Models;
-using EventsSystem.Services.Data;
-using EventsSystem.Web.ViewModels.Events;
-using EventsSystem.Web.ViewModels.Places;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EventsSystem.Web.Controllers
+﻿namespace EventsSystem.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EventsSystem.Data.Models;
+    using EventsSystem.Services.Data;
+    using EventsSystem.Web.ViewModels.Events;
+    using EventsSystem.Web.ViewModels.Places;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class PlacesController : Controller
     {
         private readonly IPlacesService placesService;
@@ -63,9 +64,8 @@ namespace EventsSystem.Web.Controllers
             }
 
             var allPlaces = this.placesService.GetAll<PlaceViewModel>(5, 0);
+
             viewModel.AllPlaces = allPlaces;
-
-
             return this.View(viewModel);
         }
 

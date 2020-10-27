@@ -91,6 +91,16 @@
                     }
                 }
             }
+            else
+            {
+                if (ev.Place.Images.Count() == 0)
+                {
+                    ev.Place.Images.Add(new Image
+                    {
+                        Path = $"images\\defaultPlaceImage.png",
+                    });
+                }
+            }
 
             this.Db.Events.Add(ev);
             this.Db.SaveChanges();

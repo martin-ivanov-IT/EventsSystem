@@ -51,7 +51,7 @@ namespace EventsSystem.Web.Hubs
 
             await this.Clients.Users(user.Id, friend.Id).SendAsync(
                 "NewMessage",
-                new MessageModel { User = this.Context.User.Identity.Name, Text = $"From: {userEmail} to {friendEmail}" + System.Environment.NewLine + messageInput });
+                new MessageModel { User = this.Context.User.Identity.Name, Text = $"{user.UserName}: {messageInput}" });
         }
     }
 }

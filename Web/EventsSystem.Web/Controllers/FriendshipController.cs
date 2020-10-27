@@ -1,15 +1,16 @@
-﻿using EventsSystem.Data;
-using EventsSystem.Data.Models;
-using EventsSystem.Web.ViewModels.FriendShip;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EventsSystem.Web.Controllers
+﻿namespace EventsSystem.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EventsSystem.Data;
+    using EventsSystem.Data.Models;
+    using EventsSystem.Web.ViewModels.FriendShip;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
     public class FriendshipController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

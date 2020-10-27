@@ -2,42 +2,99 @@
 @model EventsSystem.Web.ViewModels.Home.IndexViewModel
 @{ this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName!}"; }
 
+<section class="page-section portfolio ">
+    <div class="container">
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            
+        <section class="page-section portfolio" id="portfolio">
+            <div class="btn-group mb-3">
+                <a asp-controller="Events" asp-action="ShowAllEventsByCity" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events in your city</a>
+
+                <a asp-controller="Events" asp-action="ShowAllEvents" asp-route-page="1" class="btn btn-outline-primary btn-lg ">See All Upcomming events </a>
+
+            </div>
+            <div class="row ">
+
+                @foreach (var ev in Model.EventsByCity)
+                {
+
+                    <div class="col-md-4  mt-3">
+                        @*<div>@ev.Name</div>*@
+
+                        <div class="card-deck">
+                            <div class="card " style="width: 18rem;">
+                                <img src="@Url.Content($"~/{ev.PlaceImages.First().Path}")" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">@ev.Name</h5>
+                                    <div class="card-footer text-muted">
+                                        @ev.Time
+                                    </div>
 
 
-<div class="text-center">
-    <h1 class="display-4">@this.ViewData["Title"]</h1>
 
-    @if (User.Identity.IsAuthenticated)
-    {
-<h1> Most inerested upcomming events in your city </h1> foreach (var ev in Model.EventsByCity)
-{
+                                </div>
+                                <a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id" class="btn btn-primary stretched-link">See more</a>
+                            </div>
+                        </div>
 
-<div class="media">
-    @*<img class="mr-3" src="@ev.Place." width="100" height="100" alt="@ev.Name">*@
-    <div class="media-body">
 
-        <h4><a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id">@ev.Name</a></h4>
+                    </div>
 
-    </div>
-</div>}
-}
+                }
 
-    @if (!User.Identity.IsAuthenticated)
-    {
-<h1>  Most inerested upcomming events  </h1> foreach (var ev in Model.Events)
-{
+            </div>
+        </section>
+        }
 
-<div class="media">
 
-    <div class="media-body">
 
-        <h4><a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id">@ev.Name</a></h4>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <h1>  Viral upcomming events  </h1>
+            <section class="page-section portfolio" id="portfolio">
+                <div class="row ">
+                    @foreach (var ev in Model.Events)
+                    {
 
-    </div>
-</div>}
-}
+                        <div class="col-md-4 mt-3">
+                            @*<div>@ev.Name</div>*@
+
+                            <div class="card-deck">
+                                <div class="card " style="width: 18rem;">
+                                    <img src="@Url.Content($"~/{ev.PlaceImages.First().Path}")" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@ev.Name</h5>
+                                        <div class="card-footer text-muted">
+                                            @ev.Time
+                                        </div>
+
+
+
+                                    </div>
+                                    <a asp-controller="Events" asp-action="ById" asp-route-id="@ev.Id" class="btn btn-primary stretched-link">See more</a>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    }
+
+                </div>
+            </section>
+
+
+
+        }
+
     
-    <h4><a asp-controller="Events" asp-action="ShowAllEventsByCity" asp-route-page="1" class="btn btn-primary btn-lg ">See All Upcomming events in your city</a></h4>
+        </div>
+</section>
 
-    <h4><a asp-controller="Events" asp-action="ShowAllEvents" asp-route-page="1" class="btn btn-primary btn-lg ">See All Upcomming events </a></h4>
-</div>
+<section class="page-section" id="contact">
+</section>
+
+
